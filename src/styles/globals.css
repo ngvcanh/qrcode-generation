@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: var(--color-slate-900);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-slate-900);
+  color: white;
+  font-size: calc(var(--spacing) * 3.5rem);
+  line-height: 1.5;
+  min-height: 100dvh;
+  letter-spacing: 0;
+}
+
+/* Custom utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Button cursor pointer */
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Interactive elements cursor */
+[role="button"],
+.cursor-pointer,
+a,
+select,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled,
+select:disabled {
+  cursor: not-allowed;
+}
+
+/* Counter reset for ordered lists */
+.counter-reset-list {
+  counter-reset: list-counter;
+}
+
+.counter-reset-list li {
+  counter-increment: list-counter;
+}
+
+.counter-reset-list li::before {
+  content: counter(list-counter) ".";
+  font-weight: bold;
+  color: #3b82f6;
+  margin-right: 0.5rem;
 }

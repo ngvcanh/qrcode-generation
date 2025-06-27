@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BarChart3 } from "lucide-react";
-import dynamic from "next/dynamic";
 import SEOMeta from "@/components/seo-meta";
-
-// Dynamic imports để tránh SSR issues
-const Form = dynamic(() => import("@/components/app/form").then(mod => ({ default: mod.Form })), { ssr: false });
-const QRCodeReact = dynamic(() => import("@/components/app/qrcode-react").then(mod => ({ default: mod.QRCodeReact })), { ssr: false });
-const QRCodeReactDot = dynamic(() => import("@/components/app/qrcode-react-dot").then(mod => ({ default: mod.QRCodeReactDot })), { ssr: false });
-const QRCodeVanilla = dynamic(() => import("@/components/app/qrcode-vanilla").then(mod => ({ default: mod.QRCodeVanilla })), { ssr: false });
-const PackageInfoDialog = dynamic(() => import("@/components/app/package-info-dialog").then(mod => ({ default: mod.PackageInfoDialog })), { ssr: false });
-const CompareDrawer = dynamic(() => import("@/components/app/compare-drawer").then(mod => ({ default: mod.CompareDrawer })), { ssr: false });
-const Footer = dynamic(() => import("@/components/app/footer").then(mod => ({ default: mod.Footer })), { ssr: false });
-// import { Form } from "@/components/app/form";
-// import { QRCodeReact } from "@/components/app/qrcode-react";
-// import { QRCodeReactDot } from "@/components/app/qrcode-react-dot";
-// import { QRCodeVanilla } from "@/components/app/qrcode-vanilla";
-// import { PackageInfoDialog } from "@/components/app/package-info-dialog";
-// import { CompareDrawer } from "@/components/app/compare-drawer";
+import { Form } from "@/components/app/form";
+import { QRCodeReact } from "@/components/app/qrcode-react";
+import { QRCodeReactDot } from "@/components/app/qrcode-react-dot";
+import { QRCodeVanilla } from "@/components/app/qrcode-vanilla";
+import { PackageInfoDialog } from "@/components/app/package-info-dialog";
+import { CompareDrawer } from "@/components/app/compare-drawer";
 
 export default function Home() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
@@ -97,9 +87,6 @@ export default function Home() {
           <BarChart3 className="w-6 h-6" />
         </motion.button>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </>
   );
 }

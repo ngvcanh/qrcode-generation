@@ -1,6 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# QR Code Generator & Performance Comparison Tool
 
-## Getting Started
+A comprehensive QR code generation and performance comparison tool built with Next.js. Compare performance metrics across popular QR code libraries: `qrcode`, `react-qr-code`, and `qrcode.react`.
+
+## 🚀 Features
+
+- **Multi-Library Comparison**: Side-by-side comparison of 3 popular QR code libraries
+- **Performance Metrics**: Real-time measurement of render time, memory usage, and file size
+- **Logo Integration**: Embed custom logos into QR codes
+- **Interactive Charts**: Visualize performance data with interactive charts
+- **Responsive Design**: Modern, responsive UI with dark mode support
+- **Export Options**: Download QR codes and performance data
+- **Real-time Analysis**: Dynamic performance analysis and recommendations
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with TypeScript
+- **UI**: Tailwind CSS, Framer Motion
+- **Charts**: Recharts
+- **QR Libraries**: 
+  - `qrcode` - Server-side QR code generation
+  - `react-qr-code` - React component for QR codes
+  - `qrcode.react` - Another React QR code component
+- **Icons**: Lucide React
+- **Performance**: Built-in performance monitoring
+
+## 🚀 Getting Started
 
 First, run the development server:
 
@@ -16,25 +40,42 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## 📊 Libraries Compared
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### 1. `qrcode`
+- **Type**: Server-side QR code generation
+- **Pros**: Fast, reliable, supports various output formats
+- **Use Case**: Backend generation, Node.js applications
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### 2. `react-qr-code`
+- **Type**: SVG-based React component
+- **Pros**: Lightweight, scalable, customizable styling
+- **Use Case**: Frontend applications requiring scalable QR codes
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. `qrcode.react`
+- **Type**: Canvas/SVG React component
+- **Pros**: Flexible rendering options, good performance
+- **Use Case**: React applications with custom rendering needs
 
-## Learn More
+## 📈 Performance Metrics
 
-To learn more about Next.js, take a look at the following resources:
+The tool measures and compares:
+- **Render Time**: Time taken to generate QR code
+- **Memory Usage**: Memory consumption during generation
+- **File Size**: Output file size comparison
+- **Logo Integration**: Performance impact of logo embedding
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 🎯 Use Cases
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Library Selection**: Choose the best QR code library for your project
+- **Performance Analysis**: Understand performance characteristics
+- **Educational**: Learn about different QR code generation approaches
+- **Benchmarking**: Compare libraries under different conditions
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is created for educational and research purposes. Please ensure compliance with respective library licenses when using in production.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## 👨‍💻 Author
+
+Created by [Canh Nguyen Van](https://github.com/ngvcanh) - Full Stack Developer passionate about performance optimization and modern web technologies.
