@@ -52,21 +52,37 @@ export async function combineQRCodeWithLogo(
                 logoRounding = 8
               } = options;
               
-              // Calculate logo dimensions
-              const logoSizePx = Math.min(canvas.width, canvas.height) * logoSize;
-              const logoMarginPx = logoSizePx * logoMargin;
-              const logoTotalSize = logoSizePx + (logoMarginPx * 2);
+              // Calculate square container size
+              const containerSize = Math.min(canvas.width, canvas.height) * logoSize;
+              const logoMarginPx = containerSize * logoMargin;
+              const availableLogoSpace = containerSize - (logoMarginPx * 2);
               
-              // Calculate logo position (center)
-              const x = (canvas.width - logoTotalSize) / 2;
-              const y = (canvas.height - logoTotalSize) / 2;
+              // Calculate logo dimensions maintaining aspect ratio within square container
+              let logoWidth, logoHeight;
+              const logoAspectRatio = logoImg.width / logoImg.height;
+              
+              if (logoAspectRatio > 1) {
+                // Logo is wider than tall - fit to width
+                logoWidth = availableLogoSpace;
+                logoHeight = availableLogoSpace / logoAspectRatio;
+              } else {
+                // Logo is taller than wide or square - fit to height
+                logoHeight = availableLogoSpace;
+                logoWidth = availableLogoSpace * logoAspectRatio;
+              }
+              
+              // Calculate positions (center everything)
+              const backgroundX = (canvas.width - containerSize) / 2;
+              const backgroundY = (canvas.height - containerSize) / 2;
+              const logoX = backgroundX + (containerSize - logoWidth) / 2;
+              const logoY = backgroundY + (containerSize - logoHeight) / 2;
               
               // Save context
               ctx.save();
               
-              // Create rounded rectangle for logo background
+              // Create rounded square for logo background
               ctx.beginPath();
-              ctx.roundRect(x, y, logoTotalSize, logoTotalSize, logoRounding);
+              ctx.roundRect(backgroundX, backgroundY, containerSize, containerSize, logoRounding);
               ctx.fillStyle = logoBackground;
               ctx.fill();
               
@@ -86,13 +102,13 @@ export async function combineQRCodeWithLogo(
               // Clip to rounded rectangle for logo
               ctx.clip();
               
-              // Draw logo
+              // Draw logo with original aspect ratio
               ctx.drawImage(
                 logoImg,
-                x + logoMarginPx,
-                y + logoMarginPx,
-                logoSizePx,
-                logoSizePx
+                logoX,
+                logoY,
+                logoWidth,
+                logoHeight
               );
               
               // Restore context
