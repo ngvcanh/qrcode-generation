@@ -11,6 +11,7 @@ import rehypeRaw from 'rehype-raw';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { DownloadChart } from "@/components/app/download-chart";
+import { Tabs } from "@/components/ui/tabs";
 
 export interface PackageInfoDialogProps {
   packageName: string | null;
@@ -322,29 +323,46 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
           >
             {/* Header */}
             <div className={`px-4 md:px-6 py-4 md:py-5 bg-gradient-to-r ${colors.gradient} text-white flex-shrink-0`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 md:p-2.5 bg-white/20 rounded-lg">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="p-2 md:p-2.5 bg-white/20 rounded-lg flex-shrink-0">
                     <Package className="w-6 h-6 md:w-7 md:h-7" />
                   </div>
-                  <div>
-                    <h2 className="text-lg md:text-xl font-bold">{packageName}</h2>
-                    <p className="text-white/80 text-xs md:text-sm">NPM Package Information</p>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="text-lg md:text-xl font-bold truncate">{packageName}</h2>
+                    <p className="text-white/80 text-xs md:text-sm whitespace-nowrap">NPM Package Information</p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 md:p-2.5 hover:bg-white/20 rounded-lg transition-colors"
+                  className="p-2 md:p-2.5 hover:bg-white/20 rounded-lg transition-colors flex-shrink-0"
                 >
                   <X className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
               </div>
             </div>
 
-            {/* Tabs */}
+            {/* Tabs - Custom responsive layout */}
             <div className="flex-shrink-0 border-b border-slate-600 order-2 md:order-1">
               <div className="px-6 md:px-6">
-                <nav className="flex -mx-6 md:mx-0 md:space-x-8 overflow-x-auto scrollbar-hide">
+                {/* Desktop: Use Tabs component */}
+                <div className="hidden md:block">
+                  <Tabs
+                    tabs={[
+                      { id: 'overview', label: 'Overview', icon: Info },
+                      { id: 'performance', label: 'Performance', icon: Zap },
+                      { id: 'readme', label: 'README', icon: FileText }
+                    ]}
+                    activeTab={activeTab}
+                    onTabChange={(tabId) => setActiveTab(tabId as 'overview' | 'performance' | 'readme')}
+                    mode="outlined"
+                    variant="default"
+                    className="border-none bg-transparent p-0"
+                  />
+                </div>
+                
+                {/* Mobile: Custom bottom navigation style */}
+                <nav className="flex -mx-6 md:hidden">
                   {[
                     { id: 'overview', label: 'Overview', icon: Info },
                     { id: 'performance', label: 'Performance', icon: Zap },
@@ -355,14 +373,14 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                       <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id as 'overview' | 'performance' | 'readme')}
-                        className={`py-2 md:py-4 px-4 md:px-1 border-t-2 md:border-t-0 md:border-b-2 font-medium flex flex-col md:flex-row items-center gap-0.5 md:gap-2 transition-colors whitespace-nowrap min-w-0 flex-grow md:flex-none ${
+                        className={`py-2 px-4 border-t-2 font-medium flex flex-col items-center gap-0.5 transition-colors whitespace-nowrap min-w-0 flex-grow ${
                           activeTab === tab.id
                             ? 'border-blue-500 text-blue-400'
                             : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-300'
                         }`}
                       >
-                        <Icon className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
-                        <span className="text-[11px] md:text-sm leading-tight">{tab.label}</span>
+                        <Icon className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span className="text-[11px] leading-tight">{tab.label}</span>
                       </button>
                     );
                   })}

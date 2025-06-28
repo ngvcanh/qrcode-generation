@@ -6,6 +6,7 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area
 import { cn } from "@/lib/cn";
 import { downloadPerformanceData, downloadPerformanceCSV } from "@/lib/download";
 import { toast } from "@/lib/toast";
+import { Tabs } from "@/components/ui/tabs";
 import {
   X,
   BarChart3,
@@ -747,25 +748,16 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                 <>
                   {/* Tab Navigation */}
                   <div className="border-b border-slate-700 bg-slate-800/30 flex-shrink-0">
-                    <nav className="flex space-x-8 px-6">
-                      {tabs.map((tab) => {
-                        const Icon = tab.icon;
-                        return (
-                          <button
-                            key={tab.id}
-                            onClick={() => setActiveTab(tab.id as 'metrics' | 'analysis' | 'recommendations' | 'technical')}
-                            className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
-                              activeTab === tab.id
-                                ? 'border-blue-500 text-blue-400'
-                                : 'border-transparent text-slate-400 hover:text-slate-200'
-                            }`}
-                          >
-                            <Icon className="w-4 h-4" />
-                            {tab.label}
-                          </button>
-                        );
-                      })}
-                    </nav>
+                    <div className="px-6">
+                      <Tabs
+                        tabs={tabs.map(tab => ({ ...tab, id: tab.id }))}
+                        activeTab={activeTab}
+                        onTabChange={(tabId) => setActiveTab(tabId as 'metrics' | 'analysis' | 'recommendations' | 'technical')}
+                        mode="outlined"
+                        variant="default"
+                        className="border-none bg-transparent p-0"
+                      />
+                    </div>
                   </div>
 
                   {/* Tab Content */}

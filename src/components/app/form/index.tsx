@@ -2,15 +2,12 @@ import { NumberInput } from "@/components/ui/number-input";
 import { TextInput } from "@/components/ui/text-input"
 import { LogoUpload } from "@/components/ui/logo-upload";
 import { useQRCode } from "@/store/qrcode";
-import { useGeneration } from "@/hooks/use-generation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import { motion } from "framer-motion";
-import { QrCode, Play, Loader2 } from "lucide-react";
+import { QrCode } from "lucide-react";
 
 export function Form() {
   const { value, size, iterations, logo, setValue, setSize, setIterations, setLogo } = useQRCode();
-  const generate = useGeneration();
-  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -20,19 +17,6 @@ export function Form() {
     const newSize = parseInt(e.target.value, 10);
     if (!isNaN(newSize)) {
       setSize(newSize);
-    }
-  };
-
-  const handleGenerate = async () => {
-    if (!value.trim()) return;
-    
-    setIsGenerating(true);
-    try {
-      await generate();
-    } catch (error) {
-      console.error('Generation failed:', error);
-    } finally {
-      setIsGenerating(false);
     }
   };
 
@@ -221,84 +205,26 @@ export function Form() {
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent"></div>
             </div>
 
-            {/* Generate Button */}
+            {/* Info Cards */}
             <motion.div 
-              className="flex justify-center"
+              className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <motion.button
-                onClick={handleGenerate}
-                disabled={!value.trim() || isGenerating}
-                className={`
-                  relative flex items-center gap-4 px-10 py-5 rounded-2xl font-semibold text-lg
-                  transition-all duration-300 shadow-2xl min-w-[280px] justify-center
-                  ${!value.trim() || isGenerating
-                    ? 'bg-slate-600 text-slate-400 cursor-not-allowed shadow-slate-300/20'
-                    : 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 shadow-blue-500/30 hover:shadow-blue-500/50'
-                  }
-                `}
-                whileHover={!isGenerating && value.trim() ? { 
-                  scale: 1.02,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-                } : {}}
-                whileTap={!isGenerating && value.trim() ? { scale: 0.98 } : {}}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              >
-                <motion.div
-                  animate={isGenerating ? { rotate: 360 } : { rotate: 0 }}
-                  transition={isGenerating ? { 
-                    duration: 1, 
-                    repeat: Infinity, 
-                    ease: "linear" 
-                  } : { duration: 0.3 }}
-                >
-                  {isGenerating ? (
-                    <Loader2 className="w-7 h-7" />
-                  ) : (
-                    <QrCode className="w-7 h-7" />
-                  )}
-                </motion.div>
-                
-                <span className="font-bold">
-                  {isGenerating ? 'Generating QR Codes...' : 'Generate & Compare'}
-                </span>
-                
-                {!isGenerating && (
-                  <motion.div
-                    initial={{ x: -10, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <Play className="w-6 h-6" />
-                  </motion.div>
-                )}
-              </motion.button>
+              <div className="text-center p-4 bg-slate-700/50 rounded-xl">
+                <div className="text-2xl font-bold text-blue-400">4</div>
+                <div className="text-sm text-slate-400">Libraries</div>
+              </div>
+              <div className="text-center p-4 bg-slate-700/50 rounded-xl">
+                <div className="text-2xl font-bold text-purple-400">⚡</div>
+                <div className="text-sm text-slate-400">Performance</div>
+              </div>
+              <div className="text-center p-4 bg-slate-700/50 rounded-xl">
+                <div className="text-2xl font-bold text-pink-400">📊</div>
+                <div className="text-sm text-slate-400">Analytics</div>
+              </div>
             </motion.div>
-
-            {/* Info Cards */}
-            {!isGenerating && (
-              <motion.div 
-                className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
-                <div className="text-center p-4 bg-slate-700/50 rounded-xl">
-                  <div className="text-2xl font-bold text-blue-400">3</div>
-                  <div className="text-sm text-slate-400">Libraries</div>
-                </div>
-                <div className="text-center p-4 bg-slate-700/50 rounded-xl">
-                  <div className="text-2xl font-bold text-purple-400">⚡</div>
-                  <div className="text-sm text-slate-400">Performance</div>
-                </div>
-                <div className="text-center p-4 bg-slate-700/50 rounded-xl">
-                  <div className="text-2xl font-bold text-pink-400">📊</div>
-                  <div className="text-sm text-slate-400">Analytics</div>
-                </div>
-              </motion.div>
-            )}
           </div>
         </motion.div>
       </div>

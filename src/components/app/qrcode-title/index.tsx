@@ -40,7 +40,7 @@ export function QRCodeTitle(props: QRCodeTitleProps) {
       whileTap={{ scale: 0.98 }}
     >
       {/* Package Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className={`p-2 bg-gradient-to-r ${getPackageColor(name)} rounded-lg shadow-lg`}>
             <Package className="w-5 h-5 text-white" />
@@ -50,7 +50,7 @@ export function QRCodeTitle(props: QRCodeTitleProps) {
               {name}
             </h3>
             <p className="text-sm text-slate-400">
-              NPM Package
+              Click for package info
             </p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export function QRCodeTitle(props: QRCodeTitleProps) {
       {/* Performance Metrics */}
       {hasData && (
         <motion.div 
-          className="grid grid-cols-3 gap-3 mt-4"
+          className="grid grid-cols-3 gap-3 mt-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}

@@ -445,15 +445,30 @@ export function useGeneration() {
     waiting.current.push("qr-code-styling");
   }, [value, size, logo, styleSettings, addMetric]);
 
-  const generate = useCallback(async () => {
-    const items = [
+  const generate = useCallback(async (packageName?: string) => {
+    const allItems = [
       { name: "qrcode", fn: generateVanilla },
       { name: "react-qr-code", fn: generateReact },
       { name: "qrcode.react", fn: generateReactDot },
       { name: "qr-code-styling", fn: generateStyled },
     ];
     
-    loading.show({ message: `Generating QR codes... (${iterations} iterations)` });
+    // If packageName is specified, only generate for that package
+    const items = packageName 
+      ? allItems.filter(item => item.name === packageName)
+      : allItems;
+    
+    if (items.length === 0) {
+      console.warn(`Package "${packageName}" not found`);
+      return;
+    }
+    
+    const isGeneratingAll = !packageName;
+    const message = isGeneratingAll 
+      ? `Generating QR codes... (${iterations} iterations)`
+      : `Generating ${packageName}... (${iterations} iterations)`;
+    
+    loading.show({ message });
     
     try {
       let lastId = "";
@@ -462,9 +477,11 @@ export function useGeneration() {
       for (let i = 0; i < iterations; i++) {
         // Update progress message with percentage
         const progress = Math.round(((i + 1) / iterations) * 100);
-        loading.show({ 
-          message: `Generating QR codes... (${i + 1}/${iterations}) - ${progress}%` 
-        });
+        const progressMessage = isGeneratingAll
+          ? `Generating QR codes... (${i + 1}/${iterations}) - ${progress}%`
+          : `Generating ${packageName}... (${i + 1}/${iterations}) - ${progress}%`;
+        
+        loading.show({ message: progressMessage });
         
         // Generate new ID for each iteration
         const id = uid();

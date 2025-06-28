@@ -63,7 +63,7 @@ export function QRCodeVanilla({ onInfoClick }: QRCodeVanillaProps) {
       >
         <div className="flex flex-col items-center">
           {/* QR Code Container */}
-          <div className="relative mb-4">
+          <div className="relative">
             <div 
               className={`
                 flex items-center justify-center rounded-xl shadow-inner
@@ -119,7 +119,7 @@ export function QRCodeVanilla({ onInfoClick }: QRCodeVanillaProps) {
           {/* Action Buttons */}
           {hasQRCode && (
             <motion.div 
-              className="flex justify-center"
+              className="flex justify-center mt-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}

@@ -5,10 +5,7 @@ import dynamic from "next/dynamic";
 import SEOMeta from "@/components/seo-meta";
 
 const Form = dynamic(() => import("@/components/app/form").then(mod => ({ default: mod.Form })), { ssr: false });
-const QRCodeReact = dynamic(() => import("@/components/app/qrcode-react").then(mod => ({ default: mod.QRCodeReact })), { ssr: false });
-const QRCodeReactDot = dynamic(() => import("@/components/app/qrcode-react-dot").then(mod => ({ default: mod.QRCodeReactDot })), { ssr: false });
-const QRCodeVanilla = dynamic(() => import("@/components/app/qrcode-vanilla").then(mod => ({ default: mod.QRCodeVanilla })), { ssr: false });
-const QRCodeStyled = dynamic(() => import("@/components/app/qrcode-styled").then(mod => ({ default: mod.QRCodeStyled })), { ssr: false });
+const TabResults = dynamic(() => import("@/components/app/tab-results").then(mod => ({ default: mod.TabResults })), { ssr: false });
 const PackageInfoDialog = dynamic(() => import("@/components/app/package-info-dialog").then(mod => ({ default: mod.PackageInfoDialog })), { ssr: false });
 const CompareDrawer = dynamic(() => import("@/components/app/compare-drawer").then(mod => ({ default: mod.CompareDrawer })), { ssr: false });
 const SettingsDrawer = dynamic(() => import("@/components/app/settings-drawer").then(mod => ({ default: mod.SettingsDrawer })), { ssr: false });
@@ -54,27 +51,7 @@ export default function Home() {
         <Form />
         
         {/* Results Section */}
-        <div className="container mx-auto px-4 pb-12">
-          <div className="max-w-7xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-slate-200 mb-2">
-                QR Code Results & Performance Comparison
-              </h2>
-              <p className="text-slate-400">
-                Compare visual output and performance metrics across different libraries
-              </p>
-            </div>
-
-            {/* QR Code Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8">
-              <QRCodeVanilla onInfoClick={handlePackageInfoClick} />
-              <QRCodeReact onInfoClick={handlePackageInfoClick} />
-              <QRCodeReactDot onInfoClick={handlePackageInfoClick} />
-              <QRCodeStyled onInfoClick={handlePackageInfoClick} />
-            </div>
-          </div>
-        </div>
+        <TabResults onPackageInfoClick={handlePackageInfoClick} />
 
         {/* Package Info Dialog */}
         <PackageInfoDialog
