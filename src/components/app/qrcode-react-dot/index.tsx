@@ -2,13 +2,15 @@ import { motion } from "framer-motion";
 import { useQRCode } from "@/store/qrcode";
 import { QRCodeTitle } from "../qrcode-title";
 import { Download, Eye } from "lucide-react";
+import { downloadAsPNG, downloadAsSVG, showDownloadOptions, generateFilename } from "@/lib/download";
+import { toast } from "@/lib/toast";
 
 export interface QRCodeReactDotProps {
   onInfoClick?: (packageName: string) => void;
 }
 
 export function QRCodeReactDot({ onInfoClick }: QRCodeReactDotProps) {
-  const { size, stacks, currentId } = useQRCode();
+  const { size, stacks, currentId, value } = useQRCode();
   const packageStack = stacks['qrcode.react'];
   const hasQRCode = packageStack && packageStack.stack.length > 0;
   
@@ -16,6 +18,32 @@ export function QRCodeReactDot({ onInfoClick }: QRCodeReactDotProps) {
   const currentQRCode = hasQRCode && currentId 
     ? packageStack.stack.find(item => item.id === currentId)
     : null;
+
+  const handleDownload = async () => {
+    if (!currentQRCode?.dataURL) {
+      toast.error('No QR code to download');
+      return;
+    }
+
+    try {
+      const format = await showDownloadOptions();
+      
+      if (format === 'cancel') return;
+      
+      const filename = generateFilename('qrcode-react', value, !!currentQRCode.logo);
+      
+      if (format === 'png') {
+        await downloadAsPNG(currentQRCode.dataURL, { filename });
+        toast.success('QR code downloaded as PNG!');
+      } else if (format === 'svg') {
+        await downloadAsSVG(currentQRCode.dataURL, { filename });
+        toast.success('QR code downloaded as SVG!');
+      }
+    } catch (error) {
+      console.error('Download failed:', error);
+      toast.error('Download failed. Please try again.');
+    }
+  };
 
   return (
     <motion.div 
@@ -96,7 +124,10 @@ export function QRCodeReactDot({ onInfoClick }: QRCodeReactDotProps) {
                 <Eye className="w-4 h-4" />
                 View
               </button>
-              <button className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-slate-300 text-sm rounded-lg transition-colors flex items-center gap-2">
+              <button 
+                onClick={handleDownload}
+                className="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-slate-300 text-sm rounded-lg transition-colors flex items-center gap-2"
+              >
                 <Download className="w-4 h-4" />
                 Download
               </button>

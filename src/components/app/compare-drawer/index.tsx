@@ -4,6 +4,8 @@ import { formatBytes, formatTime } from "@/lib/format";
 import { useEffect, useState } from "react";
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import { cn } from "@/lib/cn";
+import { downloadPerformanceData, downloadPerformanceCSV } from "@/lib/download";
+import { toast } from "@/lib/toast";
 import {
   X,
   BarChart3,
@@ -23,7 +25,9 @@ import {
   Shield,
   Globe,
   Smartphone,
-  Users
+  Users,
+  Download,
+  FileText
 } from "lucide-react";
 
 interface CompareDrawerProps {
@@ -48,6 +52,44 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const handleExportJSON = () => {
+    try {
+      const allMetrics = Object.entries(stacks).flatMap(([packageName, stack]) =>
+        stack.stack.map(metric => ({ ...metric, packageName }))
+      );
+      
+      if (allMetrics.length === 0) {
+        toast.error('No performance data to export');
+        return;
+      }
+      
+      downloadPerformanceData(allMetrics, 'all-packages');
+      toast.success('Performance data exported as JSON!');
+    } catch (error) {
+      console.error('Export failed:', error);
+      toast.error('Export failed. Please try again.');
+    }
+  };
+
+  const handleExportCSV = () => {
+    try {
+      const allMetrics = Object.entries(stacks).flatMap(([packageName, stack]) =>
+        stack.stack.map(metric => ({ ...metric, packageName }))
+      );
+      
+      if (allMetrics.length === 0) {
+        toast.error('No performance data to export');
+        return;
+      }
+      
+      downloadPerformanceCSV(allMetrics, 'all-packages');
+      toast.success('Performance data exported as CSV!');
+    } catch (error) {
+      console.error('Export failed:', error);
+      toast.error('Export failed. Please try again.');
+    }
+  };
 
   // Close on Escape key
   useEffect(() => {
@@ -610,12 +652,34 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={onClose}
-                className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
-              >
-                <X className="w-6 h-6 text-slate-400" />
-              </button>
+              
+              <div className="flex items-center gap-2">
+                {/* Export Buttons */}
+                <button
+                  onClick={handleExportJSON}
+                  className="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors flex items-center gap-2"
+                  title="Export performance data as JSON"
+                >
+                  <Download className="w-4 h-4" />
+                  JSON
+                </button>
+                
+                <button
+                  onClick={handleExportCSV}
+                  className="px-3 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm rounded-lg transition-colors flex items-center gap-2"
+                  title="Export performance data as CSV"
+                >
+                  <FileText className="w-4 h-4" />
+                  CSV
+                </button>
+                
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6 text-slate-400" />
+                </button>
+              </div>
             </div>
 
             {/* Content */}
