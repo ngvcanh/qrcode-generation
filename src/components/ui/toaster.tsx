@@ -54,15 +54,15 @@ export function Toaster() {
   const getToastStyles = (type: string) => {
     switch (type) {
       case 'success':
-        return 'bg-green-100 dark:bg-green-900/80 border-green-300 dark:border-green-700 text-green-900 dark:text-green-100';
+        return 'bg-green-900/80 border-green-700 text-green-100';
       case 'error':
-        return 'bg-red-100 dark:bg-red-900/80 border-red-300 dark:border-red-700 text-red-900 dark:text-red-100';
+        return 'bg-red-900/80 border-red-700 text-red-100';
       case 'warning':
-        return 'bg-yellow-100 dark:bg-yellow-900/80 border-yellow-300 dark:border-yellow-700 text-yellow-900 dark:text-yellow-100';
+        return 'bg-yellow-900/80 border-yellow-700 text-yellow-100';
       case 'info':
-        return 'bg-blue-100 dark:bg-blue-900/80 border-blue-300 dark:border-blue-700 text-blue-900 dark:text-blue-100';
+        return 'bg-blue-900/80 border-blue-700 text-blue-100';
       default:
-        return 'bg-green-100 dark:bg-green-900/80 border-green-300 dark:border-green-700 text-green-900 dark:text-green-100';
+        return 'bg-green-900/80 border-green-700 text-green-100';
     }
   };
 

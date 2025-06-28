@@ -1,9 +1,30 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, BarChart3, Clock, MemoryStick, HardDrive, TrendingUp, Award, Zap, Lightbulb, Target, CheckCircle, AlertTriangle, ThumbsUp, Cpu, Layers, Shield, Globe, Smartphone, Users } from "lucide-react";
 import { useQRCode } from "@/store/qrcode";
 import { formatBytes, formatTime } from "@/lib/format";
 import { useEffect, useState } from "react";
 import { XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from 'recharts';
+import { cn } from "@/lib/cn";
+import {
+  X,
+  BarChart3,
+  Clock,
+  MemoryStick,
+  HardDrive,
+  TrendingUp,
+  Award,
+  Zap,
+  Lightbulb,
+  Target,
+  CheckCircle,
+  AlertTriangle,
+  ThumbsUp,
+  Cpu,
+  Layers,
+  Shield,
+  Globe,
+  Smartphone,
+  Users
+} from "lucide-react";
 
 interface CompareDrawerProps {
   isOpen: boolean;
@@ -572,28 +593,28 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 h-full w-full max-w-4xl bg-white dark:bg-slate-900 shadow-2xl z-50 flex flex-col"
+            className="fixed right-0 top-0 h-full w-full max-w-4xl bg-slate-900 shadow-2xl z-50 flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex-shrink-0">
+            <div className="flex items-center justify-between p-6 border-b border-slate-700 bg-slate-800/50 flex-shrink-0">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-2xl font-bold text-white">
                     Performance Comparison
                   </h2>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-sm text-slate-400">
                     Compare QR code libraries side by side
                   </p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
+                className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
               >
-                <X className="w-6 h-6 text-slate-600 dark:text-slate-400" />
+                <X className="w-6 h-6 text-slate-400" />
               </button>
             </div>
 
@@ -601,20 +622,20 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
             <div className="flex-1 min-h-0 flex flex-col">
               {!hasData ? (
                 <div className="flex flex-col items-center justify-center h-full text-center p-6">
-                  <div className="p-4 bg-slate-100 dark:bg-slate-800 rounded-full mb-4">
+                  <div className="p-4 bg-slate-800 rounded-full mb-4">
                     <BarChart3 className="w-12 h-12 text-slate-400" />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                  <h3 className="text-xl font-semibold text-white mb-2">
                     No Performance Data
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-400 max-w-md">
+                  <p className="text-slate-400 max-w-md">
                     Generate some QR codes first to see performance comparison between the libraries.
                   </p>
                 </div>
               ) : (
                 <>
                   {/* Tab Navigation */}
-                  <div className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 flex-shrink-0">
+                  <div className="border-b border-slate-700 bg-slate-800/30 flex-shrink-0">
                     <nav className="flex space-x-8 px-6">
                       {tabs.map((tab) => {
                         const Icon = tab.icon;
@@ -624,8 +645,8 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                             onClick={() => setActiveTab(tab.id as 'metrics' | 'analysis' | 'recommendations' | 'technical')}
                             className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                               activeTab === tab.id
-                                ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                                : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'
+                                ? 'border-blue-500 text-blue-400'
+                                : 'border-transparent text-slate-400 hover:text-slate-200'
                             }`}
                           >
                             <Icon className="w-4 h-4" />
@@ -644,70 +665,70 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                         {/* Summary Cards */}
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                           {/* Fastest Render */}
-                          <div className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl border border-blue-200 dark:border-blue-800">
+                          <div className="p-6 bg-gradient-to-br from-blue-900/20 to-blue-800/20 rounded-xl border border-blue-800">
                             <div className="flex items-center gap-3 mb-3">
-                              <Zap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                              <h3 className="font-semibold text-blue-800 dark:text-blue-200">Fastest Render</h3>
+                              <Zap className="w-6 h-6 text-blue-400" />
+                              <h3 className="font-semibold text-blue-200">Fastest Render</h3>
                             </div>
                             {(() => {
                               const best = getBestPerformer('renderTime');
                               return best ? (
                                 <div>
-                                  <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">
+                                  <div className="text-2xl font-bold text-blue-100">
                                     {best.fullName}
                                   </div>
-                                  <div className="text-sm text-blue-600 dark:text-blue-400">
+                                  <div className="text-sm text-blue-400">
                                     {formatTime(best.data!.averageRenderTime)}
                                   </div>
                                 </div>
                               ) : (
-                                <div className="text-sm text-blue-600 dark:text-blue-400">No data</div>
+                                <div className="text-sm text-blue-400">No data</div>
                               );
                             })()}
                           </div>
 
                           {/* Lowest Memory */}
-                          <div className="p-6 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl border border-purple-200 dark:border-purple-800">
+                          <div className="p-6 bg-gradient-to-br from-purple-900/20 to-purple-800/20 rounded-xl border border-purple-800">
                             <div className="flex items-center gap-3 mb-3">
-                              <MemoryStick className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                              <h3 className="font-semibold text-purple-800 dark:text-purple-200">Lowest Memory</h3>
+                              <MemoryStick className="w-6 h-6 text-purple-400" />
+                              <h3 className="font-semibold text-purple-200">Lowest Memory</h3>
                             </div>
                             {(() => {
                               const best = getBestPerformer('memoryUsage');
                               return best ? (
                                 <div>
-                                  <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">
+                                  <div className="text-2xl font-bold text-purple-100">
                                     {best.fullName}
                                   </div>
-                                  <div className="text-sm text-purple-600 dark:text-purple-400">
+                                  <div className="text-sm text-purple-400">
                                     {formatBytes(best.data!.averageMemoryUsage)}
                                   </div>
                                 </div>
                               ) : (
-                                <div className="text-sm text-purple-600 dark:text-purple-400">No data</div>
+                                <div className="text-sm text-purple-400">No data</div>
                               );
                             })()}
                           </div>
 
                           {/* Smallest Size */}
-                          <div className="p-6 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl border border-green-200 dark:border-green-800">
+                          <div className="p-6 bg-gradient-to-br from-green-900/20 to-green-800/20 rounded-xl border border-green-800">
                             <div className="flex items-center gap-3 mb-3">
-                              <HardDrive className="w-6 h-6 text-green-600 dark:text-green-400" />
-                              <h3 className="font-semibold text-green-800 dark:text-green-200">Smallest File</h3>
+                              <HardDrive className="w-6 h-6 text-green-400" />
+                              <h3 className="font-semibold text-green-200">Smallest File</h3>
                             </div>
                             {(() => {
                               const best = getBestPerformer('fileSize');
                               return best ? (
                                 <div>
-                                  <div className="text-2xl font-bold text-green-900 dark:text-green-100">
+                                  <div className="text-2xl font-bold text-green-100">
                                     {best.fullName}
                                   </div>
-                                  <div className="text-sm text-green-600 dark:text-green-400">
+                                  <div className="text-sm text-green-400">
                                     {formatBytes(best.data!.lastGeneration?.fileSize || 0)}
                                   </div>
                                 </div>
                               ) : (
-                                <div className="text-sm text-green-600 dark:text-green-400">No data</div>
+                                <div className="text-sm text-green-400">No data</div>
                               );
                             })()}
                           </div>
@@ -750,15 +771,15 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                           const metricInfo = getMetricInfo();
 
                           return (
-                            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                            <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                               <div className="flex items-center justify-between mb-6">
                                 <div className="flex items-center gap-3">
-                                  <TrendingUp className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                  <TrendingUp className="w-6 h-6 text-blue-400" />
                                   <div>
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                    <h3 className="text-xl font-bold text-white">
                                       {metricInfo.title}
                                     </h3>
-                                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                                    <p className="text-sm text-slate-400">
                                       Comparison - each package shows its last {Math.min(Math.max(...packages.map(pkg => {
                                         const data = getPackageData(pkg.name);
                                         return data ? data.totalGenerations : 0;
@@ -768,13 +789,13 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                 </div>
 
                                 {/* Metric Selector */}
-                                <div className="flex bg-slate-100 dark:bg-slate-700 rounded-lg p-0.5">
+                                <div className="flex bg-slate-700 rounded-lg p-0.5">
                                   <button
                                     onClick={() => setChartMetric('renderTime')}
                                     className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm font-medium transition-all ${
                                       chartMetric === 'renderTime'
-                                        ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                                        ? 'bg-slate-600 text-white shadow-sm'
+                                        : 'text-slate-400 hover:hover:text-white'
                                     }`}
                                   >
                                     <Clock className="w-3.5 h-3.5" />
@@ -784,8 +805,8 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                     onClick={() => setChartMetric('memoryUsage')}
                                     className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm font-medium transition-all ${
                                       chartMetric === 'memoryUsage'
-                                        ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                                        ? 'bg-slate-600 text-white shadow-sm'
+                                        : 'text-slate-400 hover:hover:text-white'
                                     }`}
                                   >
                                     <MemoryStick className="w-3.5 h-3.5" />
@@ -795,8 +816,8 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                     onClick={() => setChartMetric('fileSize')}
                                     className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm font-medium transition-all ${
                                       chartMetric === 'fileSize'
-                                        ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm'
-                                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                                        ? 'bg-slate-600 text-white shadow-sm'
+                                        : 'text-slate-400 hover:hover:text-white'
                                     }`}
                                   >
                                     <HardDrive className="w-3.5 h-3.5" />
@@ -825,12 +846,12 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                     <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
                                     <XAxis 
                                       dataKey="sequence" 
-                                      className="text-xs text-slate-600 dark:text-slate-400"
+                                      className="text-xs text-slate-400"
                                       tick={{ fontSize: 12 }}
                                       label={{ value: 'Generation Sequence', position: 'insideBottom', offset: -5 }}
                                     />
                                     <YAxis 
-                                      className="text-xs text-slate-600 dark:text-slate-400"
+                                      className="text-xs text-slate-400"
                                       tick={{ fontSize: 12 }}
                                       tickFormatter={(value) => metricInfo.formatter(value)}
                                     />
@@ -899,7 +920,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                 </ResponsiveContainer>
                               </div>
                               
-                              <div className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+                              <div className="mt-4 text-xs text-slate-400">
                                 * Each line shows the last 50 generations for that specific package. {metricInfo.description}.
                               </div>
                             </div>
@@ -907,34 +928,34 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                         })()}
 
                         {/* Detailed Comparison Table */}
-                        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
-                          <div className="p-6 border-b border-slate-200 dark:border-slate-700">
-                            <h3 className="text-xl font-bold text-slate-900 dark:text-white">Detailed Metrics</h3>
+                        <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                          <div className="p-6 border-b border-slate-700">
+                            <h3 className="text-xl font-bold text-white">Detailed Metrics</h3>
                           </div>
                           <div className="overflow-x-auto">
                             <table className="w-full">
-                              <thead className="bg-slate-50 dark:bg-slate-700/50">
+                              <thead className="bg-slate-700/50">
                                 <tr>
-                                  <th className="text-left p-4 font-semibold text-slate-900 dark:text-white">Library</th>
-                                  <th className="text-center p-4 font-semibold text-slate-900 dark:text-white">
+                                  <th className="text-left p-4 font-semibold text-white">Library</th>
+                                  <th className="text-center p-4 font-semibold text-white">
                                     <div className="flex items-center justify-center gap-2">
                                       <Clock className="w-4 h-4" />
                                       Avg Render Time
                                     </div>
                                   </th>
-                                  <th className="text-center p-4 font-semibold text-slate-900 dark:text-white">
+                                  <th className="text-center p-4 font-semibold text-white">
                                     <div className="flex items-center justify-center gap-2">
                                       <MemoryStick className="w-4 h-4" />
                                       Avg Memory
                                     </div>
                                   </th>
-                                  <th className="text-center p-4 font-semibold text-slate-900 dark:text-white">
+                                  <th className="text-center p-4 font-semibold text-white">
                                     <div className="flex items-center justify-center gap-2">
                                       <HardDrive className="w-4 h-4" />
                                       File Size
                                     </div>
                                   </th>
-                                  <th className="text-center p-4 font-semibold text-slate-900 dark:text-white">
+                                  <th className="text-center p-4 font-semibold text-white">
                                     <div className="flex items-center justify-center gap-2">
                                       <TrendingUp className="w-4 h-4" />
                                       Generations
@@ -950,17 +971,17 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                   const isFileBest = getBestPerformer('fileSize')?.name === pkg.name;
 
                                   return (
-                                    <tr key={pkg.name} className={`border-b border-slate-200 dark:border-slate-700 ${
-                                      index % 2 === 0 ? 'bg-white dark:bg-slate-800' : 'bg-slate-50 dark:bg-slate-700/30'
+                                    <tr key={pkg.name} className={`border-b border-slate-700 ${
+                                      index % 2 === 0 ? 'bg-slate-800' : 'bg-slate-700/30'
                                     }`}>
                                       <td className="p-4">
                                         <div className="flex items-center gap-3">
                                           <div className={`w-3 h-3 rounded-full bg-${pkg.color}-500`}></div>
                                           <div>
-                                            <div className="font-semibold text-slate-900 dark:text-white">
+                                            <div className="font-semibold text-white">
                                               {pkg.fullName}
                                             </div>
-                                            <div className="text-sm text-slate-500 dark:text-slate-400">
+                                            <div className="text-sm text-slate-400">
                                               {pkg.name}
                                             </div>
                                           </div>
@@ -970,7 +991,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                         {data ? (
                                           <div className="flex items-center justify-center gap-2">
                                             {isRenderBest && <Award className="w-4 h-4 text-yellow-500" />}
-                                            <span className={`font-semibold ${isRenderBest ? 'text-blue-600 dark:text-blue-400' : 'text-slate-900 dark:text-white'}`}>
+                                            <span className={`font-semibold ${isRenderBest ? 'text-blue-400' : 'text-white'}`}>
                                               {formatTime(data.averageRenderTime)}
                                             </span>
                                           </div>
@@ -982,7 +1003,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                         {data ? (
                                           <div className="flex items-center justify-center gap-2">
                                             {isMemoryBest && <Award className="w-4 h-4 text-yellow-500" />}
-                                            <span className={`font-semibold ${isMemoryBest ? 'text-purple-600 dark:text-purple-400' : 'text-slate-900 dark:text-white'}`}>
+                                            <span className={`font-semibold ${isMemoryBest ? 'text-purple-400' : 'text-white'}`}>
                                               {formatBytes(data.averageMemoryUsage)}
                                             </span>
                                           </div>
@@ -994,7 +1015,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                         {data ? (
                                           <div className="flex items-center justify-center gap-2">
                                             {isFileBest && <Award className="w-4 h-4 text-yellow-500" />}
-                                            <span className={`font-semibold ${isFileBest ? 'text-green-600 dark:text-green-400' : 'text-slate-900 dark:text-white'}`}>
+                                            <span className={`font-semibold ${isFileBest ? 'text-green-400' : 'text-white'}`}>
                                               {formatBytes(data.lastGeneration?.fileSize || 0)}
                                             </span>
                                           </div>
@@ -1004,7 +1025,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                       </td>
                                       <td className="p-4 text-center">
                                         {data ? (
-                                          <span className="font-semibold text-slate-900 dark:text-white">
+                                          <span className="font-semibold text-white">
                                             {data.totalGenerations}
                                           </span>
                                         ) : (
@@ -1030,32 +1051,32 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                           return (
                             <>
                               {/* Performance Analysis */}
-                              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                              <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                  <Lightbulb className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                  <Lightbulb className="w-6 h-6 text-blue-400" />
+                                  <h3 className="text-xl font-bold text-white">
                                     {analysis.renderPerformance.title}
                                   </h3>
                                 </div>
                                 <div className="space-y-4">
                                   <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">Key Insights</h4>
+                                    <h4 className="font-semibold text-white mb-3">Key Insights</h4>
                                     <ul className="space-y-2">
                                       {analysis.renderPerformance.insights.map((insight, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                           <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                          <span className="text-slate-600 dark:text-slate-300">{insight}</span>
+                                          <span className="text-slate-300">{insight}</span>
                                         </li>
                                       ))}
                                     </ul>
                                   </div>
                                   <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">Recommendations</h4>
+                                    <h4 className="font-semibold text-white mb-3">Recommendations</h4>
                                     <ul className="space-y-2">
                                       {analysis.renderPerformance.recommendations.map((rec, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                           <ThumbsUp className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                                          <span className="text-slate-600 dark:text-slate-300">{rec}</span>
+                                          <span className="text-slate-300">{rec}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -1064,32 +1085,32 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                               </div>
 
                               {/* Memory Usage Analysis */}
-                              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                              <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                  <MemoryStick className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                  <MemoryStick className="w-6 h-6 text-purple-400" />
+                                  <h3 className="text-xl font-bold text-white">
                                     {analysis.memoryUsage.title}
                                   </h3>
                                 </div>
                                 <div className="space-y-4">
                                   <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">Key Insights</h4>
+                                    <h4 className="font-semibold text-white mb-3">Key Insights</h4>
                                     <ul className="space-y-2">
                                       {analysis.memoryUsage.insights.map((insight, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                           <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                          <span className="text-slate-600 dark:text-slate-300">{insight}</span>
+                                          <span className="text-slate-300">{insight}</span>
                                         </li>
                                       ))}
                                     </ul>
                                   </div>
                                   <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">Recommendations</h4>
+                                    <h4 className="font-semibold text-white mb-3">Recommendations</h4>
                                     <ul className="space-y-2">
                                       {analysis.memoryUsage.recommendations.map((rec, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                           <ThumbsUp className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                                          <span className="text-slate-600 dark:text-slate-300">{rec}</span>
+                                          <span className="text-slate-300">{rec}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -1098,32 +1119,32 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                               </div>
 
                               {/* File Size Analysis */}
-                              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                              <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                  <HardDrive className="w-6 h-6 text-green-600 dark:text-green-400" />
-                                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                  <HardDrive className="w-6 h-6 text-green-400" />
+                                  <h3 className="text-xl font-bold text-white">
                                     {analysis.fileSize.title}
                                   </h3>
                                 </div>
                                 <div className="space-y-4">
                                   <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">Key Insights</h4>
+                                    <h4 className="font-semibold text-white mb-3">Key Insights</h4>
                                     <ul className="space-y-2">
                                       {analysis.fileSize.insights.map((insight, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                           <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                                          <span className="text-slate-600 dark:text-slate-300">{insight}</span>
+                                          <span className="text-slate-300">{insight}</span>
                                         </li>
                                       ))}
                                     </ul>
                                   </div>
                                   <div>
-                                    <h4 className="font-semibold text-slate-900 dark:text-white mb-3">Recommendations</h4>
+                                    <h4 className="font-semibold text-white mb-3">Recommendations</h4>
                                     <ul className="space-y-2">
                                       {analysis.fileSize.recommendations.map((rec, index) => (
                                         <li key={index} className="flex items-start gap-3">
                                           <ThumbsUp className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                                          <span className="text-slate-600 dark:text-slate-300">{rec}</span>
+                                          <span className="text-slate-300">{rec}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -1145,35 +1166,62 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                           return (
                             <>
                               {/* Use Case Scenarios */}
-                              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                              <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                  <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                  <Target className="w-6 h-6 text-blue-400" />
+                                  <h3 className="text-xl font-bold text-white">
                                     Use Case Recommendations
                                   </h3>
                                 </div>
                                 <div className="space-y-6">
                                   {recommendations.scenarios.map((scenario, index) => (
-                                    <div key={index} className="border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+                                    <div key={index} className="border border-slate-700 rounded-lg p-4">
                                       <div className="flex items-start gap-4">
-                                        <div className={`p-2 rounded-lg bg-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-100 dark:bg-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-900/20`}>
-                                          <Award className={`w-5 h-5 text-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-600 dark:text-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-400`} />
+                                        <div 
+                                          className={cn(
+                                            "p-2 rounded-lg",
+                                            {
+                                              'bg-blue-900/20': scenario.recommended === 'qrcode',
+                                              'bg-purple-900/20': scenario.recommended === 'react-qr-code',
+                                              'bg-green-900/20': scenario.recommended === 'qrcode.react'
+                                            },
+                                          )}
+                                        >
+                                          <Award
+                                            className={cn(
+                                              "w-5 h-5",
+                                              {
+                                                'text-blue-400': scenario.recommended === 'qrcode',
+                                                'text-purple-400': scenario.recommended === 'react-qr-code',
+                                                'text-green-400': scenario.recommended === 'qrcode.react'
+                                              },
+                                            )}
+                                          />
                                         </div>
                                         <div className="flex-1">
-                                          <h4 className="font-semibold text-slate-900 dark:text-white mb-2">
+                                          <h4 className="font-semibold text-white mb-2">
                                             {scenario.title}
                                           </h4>
-                                          <p className="text-slate-600 dark:text-slate-300 mb-3">
+                                          <p className="text-slate-300 mb-3">
                                             {scenario.description}
                                           </p>
-                                          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-100 text-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-800 dark:bg-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-900/20 dark:text-${scenario.recommended === 'qrcode' ? 'blue' : scenario.recommended === 'react-qr-code' ? 'purple' : 'green'}-200`}>
+                                          <div
+                                            className={cn(
+                                              "inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium",
+                                              {
+                                                'bg-blue-900/20 text-blue-200': scenario.recommended === 'qrcode',
+                                                'bg-purple-900/20 text-purple-200': scenario.recommended === 'react-qr-code',
+                                                'bg-green-900/20 text-green-200': scenario.recommended === 'qrcode.react'
+                                              },
+                                            )}
+                                          >
                                             <CheckCircle className="w-4 h-4" />
                                             Recommended: {scenario.recommended}
                                           </div>
-                                          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+                                          <p className="text-sm text-slate-400 mt-2">
                                             {scenario.reasoning}
                                           </p>
-                                          <ul className="text-sm text-slate-600 dark:text-slate-300 mt-2 space-y-1">
+                                          <ul className="text-sm text-slate-300 mt-2 space-y-1">
                                             {scenario.considerations.map((consideration, i) => (
                                               <li key={i} className="flex items-center gap-2">
                                                 <div className="w-1.5 h-1.5 bg-slate-400 rounded-full"></div>
@@ -1190,61 +1238,61 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
 
                               {/* Best Practices */}
                               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                                <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                                <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                   <div className="flex items-center gap-3 mb-4">
-                                    <Zap className="w-5 h-5 text-yellow-600 dark:text-yellow-400" />
-                                    <h4 className="font-semibold text-slate-900 dark:text-white">Performance</h4>
+                                    <Zap className="w-5 h-5 text-yellow-400" />
+                                    <h4 className="font-semibold text-white">Performance</h4>
                                   </div>
                                   <ul className="space-y-2">
                                     {bestPractices.performance.map((practice, index) => (
                                       <li key={index} className="flex items-start gap-2">
                                         <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm text-slate-600 dark:text-slate-300">{practice}</span>
+                                        <span className="text-sm text-slate-300">{practice}</span>
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
 
-                                <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                                <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                   <div className="flex items-center gap-3 mb-4">
-                                    <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                                    <h4 className="font-semibold text-slate-900 dark:text-white">Security</h4>
+                                    <Shield className="w-5 h-5 text-blue-400" />
+                                    <h4 className="font-semibold text-white">Security</h4>
                                   </div>
                                   <ul className="space-y-2">
                                     {bestPractices.security.map((practice, index) => (
                                       <li key={index} className="flex items-start gap-2">
                                         <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm text-slate-600 dark:text-slate-300">{practice}</span>
+                                        <span className="text-sm text-slate-300">{practice}</span>
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
 
-                                <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                                <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                   <div className="flex items-center gap-3 mb-4">
-                                    <Users className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                                    <h4 className="font-semibold text-slate-900 dark:text-white">Accessibility</h4>
+                                    <Users className="w-5 h-5 text-purple-400" />
+                                    <h4 className="font-semibold text-white">Accessibility</h4>
                                   </div>
                                   <ul className="space-y-2">
                                     {bestPractices.accessibility.map((practice, index) => (
                                       <li key={index} className="flex items-start gap-2">
                                         <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm text-slate-600 dark:text-slate-300">{practice}</span>
+                                        <span className="text-sm text-slate-300">{practice}</span>
                                       </li>
                                     ))}
                                   </ul>
                                 </div>
 
-                                <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                                <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                   <div className="flex items-center gap-3 mb-4">
-                                    <Smartphone className="w-5 h-5 text-green-600 dark:text-green-400" />
-                                    <h4 className="font-semibold text-slate-900 dark:text-white">User Experience</h4>
+                                    <Smartphone className="w-5 h-5 text-green-400" />
+                                    <h4 className="font-semibold text-white">User Experience</h4>
                                   </div>
                                   <ul className="space-y-2">
                                     {bestPractices.userExperience.map((practice, index) => (
                                       <li key={index} className="flex items-start gap-2">
                                         <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                                        <span className="text-sm text-slate-600 dark:text-slate-300">{practice}</span>
+                                        <span className="text-sm text-slate-300">{practice}</span>
                                       </li>
                                     ))}
                                   </ul>
@@ -1264,10 +1312,10 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                           return (
                             <>
                               {/* Architecture Comparison */}
-                              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                              <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                  <Layers className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                  <Layers className="w-6 h-6 text-blue-400" />
+                                  <h3 className="text-xl font-bold text-white">
                                     {technical.architecture.title}
                                   </h3>
                                 </div>
@@ -1277,27 +1325,27 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                     if (typeof archInfo === 'string') return null;
                                     
                                     return (
-                                      <div key={pkg.name} className="border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+                                      <div key={pkg.name} className="border border-slate-700 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-4">
                                           <div className={`w-3 h-3 rounded-full bg-${pkg.color}-500`}></div>
-                                          <h4 className="font-semibold text-slate-900 dark:text-white">{pkg.fullName}</h4>
+                                          <h4 className="font-semibold text-white">{pkg.fullName}</h4>
                                         </div>
                                         <div className="space-y-3">
                                           <div>
-                                            <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Type:</span>
-                                            <p className="text-sm text-slate-900 dark:text-white">{archInfo.type}</p>
+                                            <span className="text-sm font-medium text-slate-400">Type:</span>
+                                            <p className="text-sm text-white">{archInfo.type}</p>
                                           </div>
                                           <div>
-                                            <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Approach:</span>
-                                            <p className="text-sm text-slate-900 dark:text-white">{archInfo.approach}</p>
+                                            <span className="text-sm font-medium text-slate-400">Approach:</span>
+                                            <p className="text-sm text-white">{archInfo.approach}</p>
                                           </div>
                                           <div>
-                                            <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Dependencies:</span>
-                                            <p className="text-sm text-slate-900 dark:text-white">{archInfo.dependencies}</p>
+                                            <span className="text-sm font-medium text-slate-400">Dependencies:</span>
+                                            <p className="text-sm text-white">{archInfo.dependencies}</p>
                                           </div>
                                           <div>
-                                            <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Rendering:</span>
-                                            <p className="text-sm text-slate-900 dark:text-white">{archInfo.rendering}</p>
+                                            <span className="text-sm font-medium text-slate-400">Rendering:</span>
+                                            <p className="text-sm text-white">{archInfo.rendering}</p>
                                           </div>
                                         </div>
                                       </div>
@@ -1313,63 +1361,63 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                   if (!desc) return null;
 
                                   return (
-                                    <div key={pkg.name} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                                    <div key={pkg.name} className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                       <div className="flex items-center gap-3 mb-4">
                                         <div className={`w-4 h-4 rounded-full bg-${pkg.color}-500`}></div>
-                                        <h4 className="font-semibold text-slate-900 dark:text-white">{pkg.fullName}</h4>
+                                        <h4 className="font-semibold text-white">{pkg.fullName}</h4>
                                       </div>
                                       
                                       <div className="space-y-4">
-                                        <p className="text-sm text-slate-600 dark:text-slate-300">{desc.description}</p>
+                                        <p className="text-sm text-slate-300">{desc.description}</p>
                                         
                                         <div>
-                                          <h5 className="text-sm font-medium text-slate-900 dark:text-white mb-2">Technical Details</h5>
+                                          <h5 className="text-sm font-medium text-white mb-2">Technical Details</h5>
                                           <div className="space-y-2 text-xs">
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Architecture:</span>
-                                              <span className="text-slate-900 dark:text-white">{desc.architecture}</span>
+                                              <span className="text-slate-400">Architecture:</span>
+                                              <span className="text-white">{desc.architecture}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Bundle Size:</span>
-                                              <span className="text-slate-900 dark:text-white">{desc.bundleSize}</span>
+                                              <span className="text-slate-400">Bundle Size:</span>
+                                              <span className="text-white">{desc.bundleSize}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Compatibility:</span>
-                                              <span className="text-slate-900 dark:text-white">{desc.compatibility}</span>
+                                              <span className="text-slate-400">Compatibility:</span>
+                                              <span className="text-white">{desc.compatibility}</span>
                                             </div>
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Maintenance:</span>
-                                              <span className="text-slate-900 dark:text-white">{desc.maintenance}</span>
+                                              <span className="text-slate-400">Maintenance:</span>
+                                              <span className="text-white">{desc.maintenance}</span>
                                             </div>
                                           </div>
                                         </div>
 
                                         <div>
-                                          <h5 className="text-sm font-medium text-green-600 dark:text-green-400 mb-2">Pros</h5>
+                                          <h5 className="text-sm font-medium text-green-400 mb-2">Pros</h5>
                                           <ul className="space-y-1">
                                             {desc.pros.map((pro, index) => (
                                               <li key={index} className="flex items-center gap-2 text-xs">
                                                 <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
-                                                <span className="text-slate-600 dark:text-slate-300">{pro}</span>
+                                                <span className="text-slate-300">{pro}</span>
                                               </li>
                                             ))}
                                           </ul>
                                         </div>
 
                                         <div>
-                                          <h5 className="text-sm font-medium text-orange-600 dark:text-orange-400 mb-2">Cons</h5>
+                                          <h5 className="text-sm font-medium text-orange-400 mb-2">Cons</h5>
                                           <ul className="space-y-1">
                                             {desc.cons.map((con, index) => (
                                               <li key={index} className="flex items-center gap-2 text-xs">
                                                 <AlertTriangle className="w-3 h-3 text-orange-500 flex-shrink-0" />
-                                                <span className="text-slate-600 dark:text-slate-300">{con}</span>
+                                                <span className="text-slate-300">{con}</span>
                                               </li>
                                             ))}
                                           </ul>
                                         </div>
 
-                                        <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-                                          <p className="text-xs text-slate-500 dark:text-slate-400 italic">{desc.useCase}</p>
+                                        <div className="pt-2 border-t border-slate-700">
+                                          <p className="text-xs text-slate-400 italic">{desc.useCase}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -1378,10 +1426,10 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                               </div>
 
                               {/* Ecosystem Stats */}
-                              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+                              <div className="bg-slate-800 rounded-xl border border-slate-700 p-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                  <Globe className="w-6 h-6 text-green-600 dark:text-green-400" />
-                                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                                  <Globe className="w-6 h-6 text-green-400" />
+                                  <h3 className="text-xl font-bold text-white">
                                     {String(technical.ecosystem.title)}
                                   </h3>
                                 </div>
@@ -1391,51 +1439,51 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                     if (typeof ecoInfo === 'string' || !ecoInfo) return null;
                                     
                                     return (
-                                      <div key={pkg.name} className="border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+                                      <div key={pkg.name} className="border border-slate-700 rounded-lg p-4">
                                         <div className="flex items-center gap-3 mb-4">
                                           <div className={`w-3 h-3 rounded-full bg-${pkg.color}-500`}></div>
-                                          <h4 className="font-semibold text-slate-900 dark:text-white">{pkg.fullName}</h4>
+                                          <h4 className="font-semibold text-white">{pkg.fullName}</h4>
                                         </div>
                                         <div className="space-y-2 text-sm">
                                           {(ecoInfo as Record<string, string>).downloads && (
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Downloads:</span>
-                                              <span className="font-medium text-slate-900 dark:text-white">{(ecoInfo as Record<string, string>).downloads}</span>
+                                              <span className="text-slate-400">Downloads:</span>
+                                              <span className="font-medium text-white">{(ecoInfo as Record<string, string>).downloads}</span>
                                             </div>
                                           )}
                                           {(ecoInfo as Record<string, string>).github && (
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">GitHub:</span>
-                                              <span className="font-medium text-slate-900 dark:text-white">{(ecoInfo as Record<string, string>).github}</span>
+                                              <span className="text-slate-400">GitHub:</span>
+                                              <span className="font-medium text-white">{(ecoInfo as Record<string, string>).github}</span>
                                             </div>
                                           )}
                                           {(ecoInfo as Record<string, string>).testResults && (
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Test Data:</span>
-                                              <span className="font-medium text-blue-600 dark:text-blue-400">{(ecoInfo as Record<string, string>).testResults}</span>
+                                              <span className="text-slate-400">Test Data:</span>
+                                              <span className="font-medium text-blue-400">{(ecoInfo as Record<string, string>).testResults}</span>
                                             </div>
                                           )}
                                           {(ecoInfo as Record<string, string>).avgRenderTime && (
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Avg Render:</span>
-                                              <span className="font-medium text-green-600 dark:text-green-400">{(ecoInfo as Record<string, string>).avgRenderTime}</span>
+                                              <span className="text-slate-400">Avg Render:</span>
+                                              <span className="font-medium text-green-400">{(ecoInfo as Record<string, string>).avgRenderTime}</span>
                                             </div>
                                           )}
                                           {(ecoInfo as Record<string, string>).avgMemoryUsage && (
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">Avg Memory:</span>
-                                              <span className="font-medium text-purple-600 dark:text-purple-400">{(ecoInfo as Record<string, string>).avgMemoryUsage}</span>
+                                              <span className="text-slate-400">Avg Memory:</span>
+                                              <span className="font-medium text-purple-400">{(ecoInfo as Record<string, string>).avgMemoryUsage}</span>
                                             </div>
                                           )}
                                           {(ecoInfo as Record<string, string>).lastFileSize && (
                                             <div className="flex justify-between">
-                                              <span className="text-slate-500 dark:text-slate-400">File Size:</span>
-                                              <span className="font-medium text-orange-600 dark:text-orange-400">{(ecoInfo as Record<string, string>).lastFileSize}</span>
+                                              <span className="text-slate-400">File Size:</span>
+                                              <span className="font-medium text-orange-400">{(ecoInfo as Record<string, string>).lastFileSize}</span>
                                             </div>
                                           )}
                                           {(ecoInfo as Record<string, string>).community && (
-                                            <div className="pt-2 border-t border-slate-200 dark:border-slate-700">
-                                              <span className="text-xs text-slate-500 dark:text-slate-400">{(ecoInfo as Record<string, string>).community}</span>
+                                            <div className="pt-2 border-t border-slate-700">
+                                              <span className="text-xs text-slate-400">{(ecoInfo as Record<string, string>).community}</span>
                                             </div>
                                           )}
                                         </div>

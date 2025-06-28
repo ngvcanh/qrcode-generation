@@ -43,15 +43,15 @@ export function Loading() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
-            className="bg-white dark:bg-gray-900 rounded-lg p-8 shadow-xl max-w-sm mx-4"
+            className="bg-gray-900 rounded-lg p-8 shadow-xl max-w-sm mx-4"
           >
             <div className="flex flex-col items-center space-y-4">
               <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
               <div className="text-center">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                <h3 className="text-lg font-semibold text-white">
                   Processing...
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                <p className="text-sm text-gray-400 mt-1">
                   {message}
                 </p>
               </div>

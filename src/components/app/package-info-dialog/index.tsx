@@ -253,31 +253,31 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
     switch (name) {
       case 'qrcode':
         return { 
-          primary: 'text-blue-600 dark:text-blue-400',
+          primary: 'text-blue-400',
           bg: 'bg-blue-500',
           gradient: 'from-blue-400 to-blue-500',
-          light: 'bg-blue-50/70 dark:bg-blue-900/15'
+          light: 'bg-blue-900/15'
         };
       case 'react-qr-code':
         return { 
-          primary: 'text-purple-600 dark:text-purple-400',
+          primary: 'text-purple-400',
           bg: 'bg-purple-500',
           gradient: 'from-purple-400 to-purple-500',
-          light: 'bg-purple-50/70 dark:bg-purple-900/15'
+          light: 'bg-purple-900/15'
         };
       case 'qrcode.react':
         return { 
-          primary: 'text-pink-600 dark:text-pink-400',
+          primary: 'text-pink-400',
           bg: 'bg-pink-500',
           gradient: 'from-pink-400 to-pink-500',
-          light: 'bg-pink-50/70 dark:bg-pink-900/15'
+          light: 'bg-pink-900/15'
         };
       default:
         return { 
-          primary: 'text-gray-600 dark:text-gray-400',
+          primary: 'text-gray-400',
           bg: 'bg-gray-500',
           gradient: 'from-gray-400 to-gray-500',
-          light: 'bg-gray-50/70 dark:bg-gray-900/15'
+          light: 'bg-gray-900/15'
         };
     }
   };
@@ -306,7 +306,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
 
           {/* Dialog Container - True Fullscreen */}
           <motion.div
-            className="relative w-full h-full bg-white dark:bg-slate-800 overflow-hidden flex flex-col md:flex-col"
+            className="relative w-full h-full bg-slate-800 overflow-hidden flex flex-col md:flex-col"
             style={{ width: '100dvw', height: '100dvh' }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -335,7 +335,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
             </div>
 
             {/* Tabs */}
-            <div className="flex-shrink-0 border-b border-slate-200 dark:border-slate-600 order-2 md:order-1">
+            <div className="flex-shrink-0 border-b border-slate-600 order-2 md:order-1">
               <div className="px-6 md:px-6">
                 <nav className="flex -mx-6 md:mx-0 md:space-x-8 overflow-x-auto scrollbar-hide">
                   {[
@@ -350,8 +350,8 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                         onClick={() => setActiveTab(tab.id as 'overview' | 'performance' | 'readme')}
                         className={`py-2 md:py-4 px-4 md:px-1 border-t-2 md:border-t-0 md:border-b-2 font-medium flex flex-col md:flex-row items-center gap-0.5 md:gap-2 transition-colors whitespace-nowrap min-w-0 flex-grow md:flex-none ${
                           activeTab === tab.id
-                            ? 'border-blue-500 text-blue-600 dark:text-blue-400'
-                            : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:border-slate-300'
+                            ? 'border-blue-500 text-blue-400'
+                            : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-300'
                         }`}
                       >
                         <Icon className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
@@ -375,7 +375,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                 <div className="flex items-center justify-center h-full">
                   <div className="text-center">
                     <div className="text-red-500 text-lg font-semibold mb-2">Error Loading Package Info</div>
-                    <p className="text-slate-600 dark:text-slate-400">{error}</p>
+                    <p className="text-slate-400">{error}</p>
                   </div>
                 </div>
               )}
@@ -392,13 +392,13 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                         className="space-y-8"
                       >
                         {/* External Links */}
-                        <div className="flex items-center justify-center gap-4 pb-4 border-b border-slate-200 dark:border-slate-600">
+                        <div className="flex items-center justify-center gap-4 pb-4 border-b border-slate-600">
                           {/* NPM Link */}
                           <a
                             href={getNpmUrl(packageName || '')}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-600 dark:text-red-400 rounded-lg transition-colors group"
+                            className="flex items-center gap-2 px-4 py-2 bg-red-900/20 hover:bg-red-900/30 text-red-400 rounded-lg transition-colors group"
                             title="View on NPM"
                           >
                             <Package className="w-4 h-4" />
@@ -412,7 +412,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                               href={getGithubUrl(packageInfo?.repository?.url) || '#'}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-900/20 hover:bg-gray-100 dark:hover:bg-gray-900/30 text-gray-700 dark:text-gray-300 rounded-lg transition-colors group"
+                              className="flex items-center gap-2 px-4 py-2 bg-gray-900/20 hover:bg-gray-900/30 text-gray-300 rounded-lg transition-colors group"
                               title="View on GitHub"
                             >
                               <Github className="w-4 h-4" />
@@ -427,7 +427,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                               href={getAuthorUrl(packageInfo?.author, packageInfo?.homepage) || '#'}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg transition-colors group"
+                              className="flex items-center gap-2 px-4 py-2 bg-blue-900/20 hover:bg-blue-900/30 text-blue-400 rounded-lg transition-colors group"
                               title="Visit Author"
                             >
                               <User className="w-4 h-4" />
@@ -441,20 +441,20 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                           {/* Basic Info */}
                           <div className={`p-6 ${colors.light} rounded-xl`}>
-                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">
+                            <h3 className="text-xl font-bold text-slate-200 mb-4">
                               Package Details
                             </h3>
                             <div className="space-y-3">
                               <div className="flex justify-between">
-                                <span className="text-slate-600 dark:text-slate-400">Version:</span>
+                                <span className="text-slate-400">Version:</span>
                                 <span className="font-semibold">{packageInfo.version}</span>
                               </div>
                               <div className="flex justify-between">
-                                <span className="text-slate-600 dark:text-slate-400">License:</span>
+                                <span className="text-slate-400">License:</span>
                                 <span className="font-semibold">{packageInfo.license || 'N/A'}</span>
                               </div>
                               <div className="flex justify-between">
-                                <span className="text-slate-600 dark:text-slate-400">Size:</span>
+                                <span className="text-slate-400">Size:</span>
                                 <span className="font-semibold">
                                   {packageInfo.unpackedSize 
                                     ? `${(packageInfo.unpackedSize / 1024).toFixed(1)} KB`
@@ -463,7 +463,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                 </span>
                               </div>
                               <div className="flex justify-between">
-                                <span className="text-slate-600 dark:text-slate-400">Weekly Downloads:</span>
+                                <span className="text-slate-400">Weekly Downloads:</span>
                                 <span className="font-semibold">
                                   {packageInfo.weeklyDownloads?.toLocaleString() || 'N/A'}
                                 </span>
@@ -472,7 +472,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                             
                             {/* Download Chart */}
                             {packageInfo.downloadStats && (
-                              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-600">
+                              <div className="mt-6 pt-4 border-t border-slate-600">
                                 <DownloadChart 
                                   data={packageInfo.downloadStats} 
                                   color={colors.bg === 'bg-blue-500' ? '#3b82f6' : 
@@ -484,15 +484,15 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                           </div>
 
                           {/* Quick Stats */}
-                          <div className="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">
+                          <div className="p-6 bg-slate-700/50 rounded-xl">
+                            <h3 className="text-xl font-bold text-slate-200 mb-4">
                               Quick Stats
                             </h3>
                             <div className="space-y-4">
                               <div className="flex items-center gap-3">
                                 <Package className="w-5 h-5 text-blue-500" />
                                 <div>
-                                  <div className="text-sm text-slate-600 dark:text-slate-400">Repository</div>
+                                  <div className="text-sm text-slate-400">Repository</div>
                                   <div className="font-bold text-sm">
                                     {packageInfo.repository?.url?.replace(/^git\+/, '').replace(/\.git$/, '') || 'N/A'}
                                   </div>
@@ -501,7 +501,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                               <div className="flex items-center gap-3">
                                 <HardDrive className="w-5 h-5 text-green-500" />
                                 <div>
-                                  <div className="text-sm text-slate-600 dark:text-slate-400">Dependencies</div>
+                                  <div className="text-sm text-slate-400">Dependencies</div>
                                   <div className="font-bold">
                                     {packageInfo.dependencies ? Object.keys(packageInfo.dependencies).length : 0}
                                   </div>
@@ -510,7 +510,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                               <div className="flex items-center gap-3">
                                 <FileText className="w-5 h-5 text-purple-500" />
                                 <div>
-                                  <div className="text-sm text-slate-600 dark:text-slate-400">Keywords</div>
+                                  <div className="text-sm text-slate-400">Keywords</div>
                                   <div className="font-bold">
                                     {packageInfo.keywords?.length || 0}
                                   </div>
@@ -520,11 +520,11 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                             
                             {/* Description */}
                             {packageInfo.description && (
-                              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-600">
-                                <h4 className="text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+                              <div className="mt-6 pt-4 border-t border-slate-600">
+                                <h4 className="text-sm font-medium text-slate-300 mb-2">
                                   Description
                                 </h4>
-                                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                <p className="text-sm text-slate-400 leading-relaxed">
                                   {packageInfo.description}
                                 </p>
                               </div>
@@ -533,20 +533,20 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                             {/* Keywords */}
                             {packageInfo.keywords && packageInfo.keywords.length > 0 && (
                               <div className="mt-4">
-                                <h4 className="text-sm font-medium text-slate-600 dark:text-slate-300 mb-2">
+                                <h4 className="text-sm font-medium text-slate-300 mb-2">
                                   Keywords
                                 </h4>
                                 <div className="flex flex-wrap gap-1">
                                   {packageInfo.keywords.slice(0, 8).map((keyword) => (
                                     <span
                                       key={keyword}
-                                      className="px-2 py-1 bg-slate-200 dark:bg-slate-600 text-xs rounded text-slate-700 dark:text-slate-300"
+                                      className="px-2 py-1 bg-slate-600 text-xs rounded text-slate-300"
                                     >
                                       {keyword}
                                     </span>
                                   ))}
                                   {packageInfo.keywords.length > 8 && (
-                                    <span className="text-xs text-slate-500 dark:text-slate-400 px-2 py-1">
+                                    <span className="text-xs text-slate-400 px-2 py-1">
                                       +{packageInfo.keywords.length - 8} more
                                     </span>
                                   )}
@@ -558,15 +558,15 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
 
                         {/* Dependencies */}
                         {packageInfo.dependencies && Object.keys(packageInfo.dependencies).length > 0 && (
-                          <div className="p-6 bg-white dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
-                            <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">
+                          <div className="p-6 bg-slate-700 rounded-xl border border-slate-600">
+                            <h3 className="text-xl font-bold text-slate-200 mb-4">
                               Dependencies
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                               {Object.entries(packageInfo.dependencies).map(([dep, version]) => (
-                                <div key={dep} className="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-600/50 rounded-lg">
+                                <div key={dep} className="flex justify-between items-center p-3 bg-slate-600/50 rounded-lg">
                                   <span className="font-mono text-sm">{dep}</span>
-                                  <span className="text-sm text-slate-600 dark:text-slate-400">{version}</span>
+                                  <span className="text-sm text-slate-400">{version}</span>
                                 </div>
                               ))}
                             </div>
@@ -587,52 +587,52 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                           <>
                             {/* Performance Summary */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                              <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+                              <div className="p-6 bg-blue-900/20 rounded-xl border border-blue-800">
                                 <div className="flex items-center gap-3 mb-2">
                                   <Clock className="w-6 h-6 text-blue-500" />
-                                  <span className="text-sm font-medium text-blue-600 dark:text-blue-400">Render Time</span>
+                                  <span className="text-sm font-medium text-blue-400">Render Time</span>
                                 </div>
-                                <div className="text-2xl font-bold text-blue-800 dark:text-blue-200">
+                                <div className="text-2xl font-bold text-blue-200">
                                   {formatTime(metrics.averageRenderTime)}
                                 </div>
-                                <div className="text-sm text-blue-600 dark:text-blue-400">Average</div>
+                                <div className="text-sm text-blue-400">Average</div>
                               </div>
 
-                              <div className="p-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-800">
+                              <div className="p-6 bg-purple-900/20 rounded-xl border border-purple-800">
                                 <div className="flex items-center gap-3 mb-2">
                                   <MemoryStick className="w-6 h-6 text-purple-500" />
-                                  <span className="text-sm font-medium text-purple-600 dark:text-purple-400">Memory Usage</span>
+                                  <span className="text-sm font-medium text-purple-400">Memory Usage</span>
                                 </div>
-                                <div className="text-2xl font-bold text-purple-800 dark:text-purple-200">
+                                <div className="text-2xl font-bold text-purple-200">
                                   {formatBytes(metrics.averageMemoryUsage)}
                                 </div>
-                                <div className="text-xs text-purple-500 dark:text-purple-400 mt-1">
+                                <div className="text-xs text-purple-400 mt-1">
                                   {getMemoryStatus()}
                                 </div>
-                                <div className="text-sm text-purple-600 dark:text-purple-400">Average</div>
+                                <div className="text-sm text-purple-400">Average</div>
                               </div>
 
-                              <div className="p-6 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-200 dark:border-green-800">
+                              <div className="p-6 bg-green-900/20 rounded-xl border border-green-800">
                                 <div className="flex items-center gap-3 mb-2">
                                   <HardDrive className="w-6 h-6 text-green-500" />
-                                  <span className="text-sm font-medium text-green-600 dark:text-green-400">Generations</span>
+                                  <span className="text-sm font-medium text-green-400">Generations</span>
                                 </div>
-                                <div className="text-2xl font-bold text-green-800 dark:text-green-200">
+                                <div className="text-2xl font-bold text-green-200">
                                   {metrics.totalGenerations}
                                 </div>
-                                <div className="text-sm text-green-600 dark:text-green-400">Total</div>
+                                <div className="text-sm text-green-400">Total</div>
                               </div>
                             </div>
 
                             {/* Performance History */}
                             {packageStack.stack.length > 0 && (
-                              <div className="p-6 bg-white dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600">
-                                <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-4">
+                              <div className="p-6 bg-slate-700 rounded-xl border border-slate-600">
+                                <h3 className="text-xl font-bold text-slate-200 mb-4">
                                   Recent Performance History
                                 </h3>
                                 <div className="space-y-3 max-h-96 overflow-y-auto">
                                   {packageStack.stack.slice(-15).reverse().map((metric, index) => (
-                                    <div key={metric.id} className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-600/50 rounded-lg">
+                                    <div key={metric.id} className="flex items-center justify-between p-4 bg-slate-600/50 rounded-lg">
                                       <div className="flex items-center gap-3">
                                         <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
                                           {index + 1}
@@ -641,26 +641,26 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                           <span className="text-sm font-mono font-medium">
                                             {new Date(metric.timestamp).toLocaleString()}
                                           </span>
-                                          <div className="text-xs text-slate-500 dark:text-slate-400">
+                                          <div className="text-xs text-slate-400">
                                             Value: {metric.value} | Size: {metric.size}px
                                           </div>
                                         </div>
                                       </div>
                                       <div className="flex gap-6 text-sm">
                                         <div className="text-center">
-                                          <div className="font-bold text-blue-600 dark:text-blue-400">
+                                          <div className="font-bold text-blue-400">
                                             {formatTime(metric.renderTime)}
                                           </div>
                                           <div className="text-xs text-slate-500">Render</div>
                                         </div>
                                         <div className="text-center">
-                                          <div className="font-bold text-purple-600 dark:text-purple-400">
+                                          <div className="font-bold text-purple-400">
                                             {formatBytes(metric.memoryUsage)}
                                           </div>
                                           <div className="text-xs text-slate-500">Memory</div>
                                         </div>
                                         <div className="text-center">
-                                          <div className="font-bold text-green-600 dark:text-green-400">
+                                          <div className="font-bold text-green-400">
                                             {(metric.fileSize / 1024).toFixed(1)}KB
                                           </div>
                                           <div className="text-xs text-slate-500">Size</div>
@@ -674,11 +674,11 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                           </>
                         ) : (
                           <div className="text-center py-12">
-                            <Zap className="w-16 h-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-bold text-slate-600 dark:text-slate-400 mb-2">
+                            <Zap className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                            <h3 className="text-xl font-bold text-slate-400 mb-2">
                               No Performance Data
                             </h3>
-                            <p className="text-slate-500 dark:text-slate-500">
+                            <p className="text-slate-500">
                               Generate some QR codes to see performance metrics for this package.
                             </p>
                           </div>
@@ -695,51 +695,51 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                         className="space-y-6"
                       >
                         {packageInfo.readme ? (
-                          <div className="bg-white dark:bg-slate-700 rounded-xl border border-slate-200 dark:border-slate-600 overflow-hidden">
-                            <div className="p-4 bg-slate-50 dark:bg-slate-600/50 border-b border-slate-200 dark:border-slate-600">
-                              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                          <div className="bg-slate-700 rounded-xl border border-slate-600 overflow-hidden">
+                            <div className="p-4 bg-slate-600/50 border-b border-slate-600">
+                              <h3 className="text-lg font-bold text-slate-200 flex items-center gap-2">
                                 <FileText className="w-5 h-5" />
                                 README.md
                               </h3>
                             </div>
                             <div className="p-6 max-w-none">
-                              <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:scroll-mt-20">
+                              <div className="prose prose-invert max-w-none prose-headings:scroll-mt-20">
                                 <ReactMarkdown
                                   remarkPlugins={[remarkGfm]}
                                   rehypePlugins={[rehypeRaw]}
                                   components={{
                                     h1: ({ children }) => (
-                                      <h1 className="text-4xl font-bold text-slate-800 dark:text-slate-100 mb-6 pb-3 border-b-2 border-slate-200 dark:border-slate-600">
+                                      <h1 className="text-4xl font-bold text-slate-100 mb-6 pb-3 border-b-2 border-slate-600">
                                         {children}
                                       </h1>
                                     ),
                                     h2: ({ children }) => (
-                                      <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-4 mt-8 flex items-center gap-3">
+                                      <h2 className="text-3xl font-bold text-slate-100 mb-4 mt-8 flex items-center gap-3">
                                         <span className="w-2 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></span>
                                         {children}
                                       </h2>
                                     ),
                                     h3: ({ children }) => (
-                                      <h3 className="text-2xl font-bold text-slate-700 dark:text-slate-200 mb-3 mt-6 flex items-center gap-2">
+                                      <h3 className="text-2xl font-bold text-slate-200 mb-3 mt-6 flex items-center gap-2">
                                         <span className="w-1.5 h-6 bg-gradient-to-b from-green-500 to-blue-500 rounded-full"></span>
                                         {children}
                                       </h3>
                                     ),
                                     h4: ({ children }) => (
-                                      <h4 className="text-xl font-semibold text-slate-700 dark:text-slate-200 mb-2 mt-4 flex items-center gap-2">
+                                      <h4 className="text-xl font-semibold text-slate-200 mb-2 mt-4 flex items-center gap-2">
                                         <span className="w-1 h-4 bg-gradient-to-b from-yellow-500 to-orange-500 rounded-full"></span>
                                         {children}
                                       </h4>
                                     ),
                                     p: ({ children }) => (
-                                      <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                                      <p className="text-slate-300 leading-relaxed mb-4">
                                         {children}
                                       </p>
                                     ),
                                     a: ({ children, href }) => (
                                       <a 
                                         href={href} 
-                                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline decoration-blue-400 dark:decoration-blue-500 underline-offset-2 transition-colors font-medium"
+                                        className="text-blue-400 hover:text-blue-300 underline decoration-blue-500 underline-offset-2 transition-colors font-medium"
                                         target="_blank" 
                                         rel="noopener noreferrer"
                                       >
@@ -747,12 +747,12 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                       </a>
                                     ),
                                     strong: ({ children }) => (
-                                      <strong className="font-bold text-slate-800 dark:text-slate-100">
+                                      <strong className="font-bold text-slate-100">
                                         {children}
                                       </strong>
                                     ),
                                     em: ({ children }) => (
-                                      <em className="italic text-slate-600 dark:text-slate-400">
+                                      <em className="italic text-slate-400">
                                         {children}
                                       </em>
                                     ),
@@ -767,7 +767,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                       </ol>
                                     ),
                                     li: ({ children, ...props }) => (
-                                      <li className="flex items-start gap-3 text-slate-600 dark:text-slate-300" {...props}>
+                                      <li className="flex items-start gap-3 text-slate-300" {...props}>
                                         <span className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mt-2 flex-shrink-0"></span>
                                         <span>{children}</span>
                                       </li>
@@ -780,7 +780,7 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                       const codeId = `code-${Math.random().toString(36).substr(2, 9)}`;
                                       
                                       return isInline ? (
-                                        <code className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-2 py-1 rounded text-sm font-mono" {...props}>
+                                        <code className="bg-slate-800 text-slate-200 px-2 py-1 rounded text-sm font-mono" {...props}>
                                           {children}
                                         </code>
                                       ) : (
@@ -839,42 +839,42 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                       </div>
                                     ),
                                     blockquote: ({ children }) => (
-                                      <blockquote className="border-l-4 border-blue-500 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 pl-6 pr-4 py-4 italic text-slate-700 dark:text-slate-300 my-6 rounded-r-lg">
+                                      <blockquote className="border-l-4 border-blue-500 bg-gradient-to-r from-blue-900/20 to-purple-900/20 pl-6 pr-4 py-4 italic text-slate-300 my-6 rounded-r-lg">
                                         <div className="flex items-start gap-3">
-                                          <span className="text-2xl text-blue-500 dark:text-blue-400 leading-none">&ldquo;</span>
+                                          <span className="text-2xl text-blue-400 leading-none">&ldquo;</span>
                                           <div>{children}</div>
                                         </div>
                                       </blockquote>
                                     ),
                                     table: ({ children }) => (
-                                      <div className="overflow-x-auto my-6 rounded-lg border border-slate-300 dark:border-slate-600 shadow-sm">
-                                        <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                                      <div className="overflow-x-auto my-6 rounded-lg border border-slate-600 shadow-sm">
+                                        <table className="min-w-full divide-y divide-slate-700">
                                           {children}
                                         </table>
                                       </div>
                                     ),
                                     thead: ({ children }) => (
-                                      <thead className="bg-slate-50 dark:bg-slate-800">
+                                      <thead className="bg-slate-800">
                                         {children}
                                       </thead>
                                     ),
                                     tbody: ({ children }) => (
-                                      <tbody className="bg-white dark:bg-slate-700 divide-y divide-slate-200 dark:divide-slate-700">
+                                      <tbody className="bg-slate-700 divide-y divide-slate-700">
                                         {children}
                                       </tbody>
                                     ),
                                     th: ({ children }) => (
-                                      <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider border-b border-slate-200 dark:border-slate-600">
+                                      <th className="px-4 py-3 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-600">
                                         {children}
                                       </th>
                                     ),
                                     td: ({ children }) => (
-                                      <td className="px-4 py-3 text-sm text-slate-600 dark:text-slate-300 border-b border-slate-100 dark:border-slate-700/50">
+                                      <td className="px-4 py-3 text-sm text-slate-300 border-b border-slate-700/50">
                                         {children}
                                       </td>
                                     ),
                                     hr: () => (
-                                      <hr className="my-8 border-0 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent" />
+                                      <hr className="my-8 border-0 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
                                     ),
                                     img: ({ src, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
                                       // Convert relative GitHub URLs to absolute URLs
@@ -925,12 +925,12 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                                           <img 
                                             src={processedSrc}
                                             alt={alt || 'README Image'}
-                                            className="max-w-full h-auto rounded-lg border border-slate-200 dark:border-slate-600 shadow-lg inline-block"
+                                            className="max-w-full h-auto rounded-lg border border-slate-600 shadow-lg inline-block"
                                             loading="lazy"
                                             {...props}
                                           />
                                           {alt && (
-                                            <div className="text-sm text-slate-500 dark:text-slate-400 mt-2 italic">
+                                            <div className="text-sm text-slate-400 mt-2 italic">
                                               {alt}
                                             </div>
                                           )}
@@ -946,11 +946,11 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
                           </div>
                         ) : (
                           <div className="text-center py-12">
-                            <FileText className="w-16 h-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-                            <h3 className="text-xl font-bold text-slate-600 dark:text-slate-400 mb-2">
+                            <FileText className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                            <h3 className="text-xl font-bold text-slate-400 mb-2">
                               No README Available
                             </h3>
-                            <p className="text-slate-500 dark:text-slate-500">
+                            <p className="text-slate-500">
                               This package doesn&apos;t have a README file or it couldn&apos;t be loaded.
                             </p>
                           </div>

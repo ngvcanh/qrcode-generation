@@ -44,7 +44,7 @@ export function Form() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
       <div className="container mx-auto px-4 py-12">
         {/* Header Section */}
         <motion.div 
@@ -61,7 +61,7 @@ export function Form() {
               QR Code Generator
             </h1>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Compare performance across multiple QR code libraries. Generate QR codes with qrcode, react-qr-code, and qrcode.react.
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export function Form() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8">
+          <div className="bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-8">
             {/* Form Fields */}
             <div className="space-y-10">
               <motion.div
@@ -92,21 +92,21 @@ export function Form() {
                   <button
                     type="button"
                     onClick={() => setValue("https://github.com/ngvcanh/qrcode-generation")}
-                    className="px-3 py-1.5 text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors"
+                    className="px-3 py-1.5 text-xs bg-blue-900/30 text-blue-300 rounded-lg hover:bg-blue-900/50 transition-colors"
                   >
                     Sample URL
                   </button>
                   <button
                     type="button"
                     onClick={() => setValue("Hello World! This is a QR code test.")}
-                    className="px-3 py-1.5 text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors"
+                    className="px-3 py-1.5 text-xs bg-purple-900/30 text-purple-300 rounded-lg hover:bg-purple-900/50 transition-colors"
                   >
                     Sample Text
                   </button>
                   <button
                     type="button"
                     onClick={() => setValue("mailto:hello@example.com?subject=Hello")}
-                    className="px-3 py-1.5 text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
+                    className="px-3 py-1.5 text-xs bg-green-900/30 text-green-300 rounded-lg hover:bg-green-900/50 transition-colors"
                   >
                     Email
                   </button>
@@ -126,7 +126,7 @@ export function Form() {
                   className="w-full"
                 />
                 <div className="mt-3 space-y-2">
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-slate-400">
                     Recommended: 128px - 512px for optimal quality
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -138,7 +138,7 @@ export function Form() {
                         className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
                           size === sizeOption
                             ? 'bg-blue-500 text-white'
-                            : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'
+                            : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
                         }`}
                       >
                         {sizeOption}px
@@ -154,7 +154,7 @@ export function Form() {
                 transition={{ duration: 0.5, delay: 0.45 }}
               >
                 <div className="space-y-3">
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                  <label className="block text-sm font-medium text-slate-300">
                     Logo for QR Code (Optional)
                   </label>
                   <LogoUpload
@@ -162,7 +162,7 @@ export function Form() {
                     onChange={setLogo}
                     className="w-full"
                   />
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-slate-400">
                     Upload a logo to embed in the center of your QR codes (PNG, JPG, GIF - max 5MB)
                   </p>
                 </div>
@@ -181,13 +181,13 @@ export function Form() {
                   className="w-full"
                 />
                 <div className="mt-3 space-y-2">
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-slate-400">
                     More iterations = better performance data & longer loading time (max 200)
                   </p>
                   {iterations > 100 && (
-                    <div className="flex items-center gap-2 px-3 py-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                    <div className="flex items-center gap-2 px-3 py-2 bg-yellow-900/20 border border-yellow-800 rounded-lg">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                      <p className="text-sm text-yellow-300">
                         High iteration count may take longer to process (est. {Math.ceil(iterations * 0.1)}s)
                       </p>
                     </div>
@@ -201,7 +201,7 @@ export function Form() {
                         className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
                           iterations === iterOption
                             ? 'bg-purple-500 text-white'
-                            : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600'
+                            : 'bg-slate-700 text-slate-400 hover:bg-slate-600'
                         }`}
                       >
                         {iterOption}x
@@ -214,11 +214,11 @@ export function Form() {
 
             {/* Divider */}
             <div className="flex items-center my-8">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"></div>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent"></div>
               <div className="px-4">
                 <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
               </div>
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-600 to-transparent"></div>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent"></div>
             </div>
 
             {/* Generate Button */}
@@ -235,7 +235,7 @@ export function Form() {
                   relative flex items-center gap-4 px-10 py-5 rounded-2xl font-semibold text-lg
                   transition-all duration-300 shadow-2xl min-w-[280px] justify-center
                   ${!value.trim() || isGenerating
-                    ? 'bg-slate-300 dark:bg-slate-600 text-slate-500 dark:text-slate-400 cursor-not-allowed shadow-slate-300/20'
+                    ? 'bg-slate-600 text-slate-400 cursor-not-allowed shadow-slate-300/20'
                     : 'bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 shadow-blue-500/30 hover:shadow-blue-500/50'
                   }
                 `}
@@ -285,17 +285,17 @@ export function Form() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
-                <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">3</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">Libraries</div>
+                <div className="text-center p-4 bg-slate-700/50 rounded-xl">
+                  <div className="text-2xl font-bold text-blue-400">3</div>
+                  <div className="text-sm text-slate-400">Libraries</div>
                 </div>
-                <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">⚡</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">Performance</div>
+                <div className="text-center p-4 bg-slate-700/50 rounded-xl">
+                  <div className="text-2xl font-bold text-purple-400">⚡</div>
+                  <div className="text-sm text-slate-400">Performance</div>
                 </div>
-                <div className="text-center p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
-                  <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">📊</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">Analytics</div>
+                <div className="text-center p-4 bg-slate-700/50 rounded-xl">
+                  <div className="text-2xl font-bold text-pink-400">📊</div>
+                  <div className="text-sm text-slate-400">Analytics</div>
                 </div>
               </motion.div>
             )}

@@ -4,7 +4,6 @@ import { BarChart3 } from "lucide-react";
 import dynamic from "next/dynamic";
 import SEOMeta from "@/components/seo-meta";
 
-// Dynamic imports để tránh SSR issues
 const Form = dynamic(() => import("@/components/app/form").then(mod => ({ default: mod.Form })), { ssr: false });
 const QRCodeReact = dynamic(() => import("@/components/app/qrcode-react").then(mod => ({ default: mod.QRCodeReact })), { ssr: false });
 const QRCodeReactDot = dynamic(() => import("@/components/app/qrcode-react-dot").then(mod => ({ default: mod.QRCodeReactDot })), { ssr: false });
@@ -12,12 +11,6 @@ const QRCodeVanilla = dynamic(() => import("@/components/app/qrcode-vanilla").th
 const PackageInfoDialog = dynamic(() => import("@/components/app/package-info-dialog").then(mod => ({ default: mod.PackageInfoDialog })), { ssr: false });
 const CompareDrawer = dynamic(() => import("@/components/app/compare-drawer").then(mod => ({ default: mod.CompareDrawer })), { ssr: false });
 const Footer = dynamic(() => import("@/components/app/footer").then(mod => ({ default: mod.Footer })), { ssr: false });
-// import { Form } from "@/components/app/form";
-// import { QRCodeReact } from "@/components/app/qrcode-react";
-// import { QRCodeReactDot } from "@/components/app/qrcode-react-dot";
-// import { QRCodeVanilla } from "@/components/app/qrcode-vanilla";
-// import { PackageInfoDialog } from "@/components/app/package-info-dialog";
-// import { CompareDrawer } from "@/components/app/compare-drawer";
 
 export default function Home() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
@@ -46,7 +39,7 @@ export default function Home() {
     <>
       <SEOMeta />
       
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
         <Form />
         
         {/* Results Section */}
@@ -54,10 +47,10 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             {/* Section Header */}
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-200 mb-2">
+              <h2 className="text-3xl font-bold text-slate-200 mb-2">
                 QR Code Results & Performance Comparison
               </h2>
-              <p className="text-slate-600 dark:text-slate-400">
+              <p className="text-slate-400">
                 Compare visual output and performance metrics across different libraries
               </p>
             </div>
