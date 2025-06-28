@@ -10,7 +10,7 @@ export interface QRCodeVanillaProps {
 }
 
 export function QRCodeVanilla({ onInfoClick }: QRCodeVanillaProps) {
-  const { size, stacks, currentId, value } = useQRCode();
+  const { size, stacks, currentId, value, styleSettings } = useQRCode();
   const packageStack = stacks['qrcode'];
   const hasQRCode = packageStack && packageStack.stack.length > 0;
   
@@ -68,11 +68,15 @@ export function QRCodeVanilla({ onInfoClick }: QRCodeVanillaProps) {
               className={`
                 flex items-center justify-center rounded-xl shadow-inner
                 ${hasQRCode 
-                  ? 'bg-white border-2 border-slate-600' 
+                  ? 'border-2 border-slate-600' 
                   : 'bg-slate-700 border-2 border-dashed border-slate-600'
                 }
               `}
-              style={{ width: size, height: size }}
+              style={{ 
+                width: size, 
+                height: size,
+                backgroundColor: hasQRCode ? styleSettings.backgroundColor : undefined
+              }}
             >
               {hasQRCode && currentQRCode ? (
                 <div className="relative">

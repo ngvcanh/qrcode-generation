@@ -57,7 +57,7 @@ const sanitizeMetric = (value: number, fallback: number = 0): number => {
 };
 
 export function useGeneration() {
-  const { value, size, iterations, logo, addMetric, setCurrentId } = useQRCode();
+  const { value, size, iterations, logo, styleSettings, addMetric, setCurrentId } = useQRCode();
 
   const waiting = useRef<string[]>([]);
 
@@ -92,15 +92,15 @@ export function useGeneration() {
         width: size,
         margin: 1,
         color: {
-          dark: "#000000",
-          light: "#ffffff",
+          dark: styleSettings.foregroundColor,
+          light: styleSettings.backgroundColor,
         },
       });
 
       // If logo is present, combine it with QR code
       if (logo) {
         try {
-          dataURL = await createQRCodeWithLogo(dataURL, logo);
+          dataURL = await createQRCodeWithLogo(dataURL, logo, styleSettings);
         } catch (error) {
           console.warn('Failed to add logo to QR code:', error);
           // Continue with original QR code without logo
@@ -131,7 +131,7 @@ export function useGeneration() {
     }
 
     waiting.current.push("qrcode");
-  }, [value, size, logo, addMetric]);
+  }, [value, size, logo, styleSettings, addMetric]);
 
   const generateReact = useCallback(async (id: string) => {
     // Skip if not on client side or renderToString not available
@@ -153,6 +153,8 @@ export function useGeneration() {
           maxWidth: '100%',
           width: '100%',
         },
+        bgColor: styleSettings.backgroundColor,
+        fgColor: styleSettings.foregroundColor,
       });
 
       const svg = renderToString(element);
@@ -161,7 +163,7 @@ export function useGeneration() {
       // If logo is present, combine it with QR code
       if (logo) {
         try {
-          dataURL = await createQRCodeWithLogo(dataURL, logo);
+          dataURL = await createQRCodeWithLogo(dataURL, logo, styleSettings);
         } catch (error) {
           console.warn('Failed to add logo to QR code:', error);
           // Continue with original QR code without logo
@@ -190,7 +192,7 @@ export function useGeneration() {
     }
 
     waiting.current.push("react-qr-code");
-  }, [value, size, logo, addMetric]);
+  }, [value, size, logo, styleSettings, addMetric]);
 
   const generateReactDot = useCallback(async (id: string) => {
     // Skip if not on client side or renderToString not available
@@ -203,13 +205,17 @@ export function useGeneration() {
     const startMemory = getMemoryUsage();
 
     try {
+      // Note: qrcode.react only supports basic styling (colors)
+      // Advanced dot/corner styles are not supported by this library
       const element = createElement(QRCodeSVG, {
         value,
         size,
         level: "M",
         includeMargin: true,
-        fgColor: "#000000",
-        bgColor: "#ffffff",
+        fgColor: styleSettings.foregroundColor,
+        bgColor: styleSettings.backgroundColor,
+        style: { maxWidth: "100%", width: "100%" },
+        marginSize: 4,
       });
 
       const svg = renderToString(element);
@@ -218,7 +224,7 @@ export function useGeneration() {
       // If logo is present, combine it with QR code
       if (logo) {
         try {
-          dataURL = await createQRCodeWithLogo(dataURL, logo);
+          dataURL = await createQRCodeWithLogo(dataURL, logo, styleSettings);
         } catch (error) {
           console.warn('Failed to add logo to QR code:', error);
           // Continue with original QR code without logo
@@ -247,13 +253,175 @@ export function useGeneration() {
     }
 
     waiting.current.push("qrcode.react");
-  }, [value, size, logo, addMetric]);
+  }, [value, size, logo, styleSettings, addMetric]);
+
+  const generateStyled = useCallback(async (id: string) => {
+    // Skip if not on client side
+    if (typeof window === 'undefined') {
+      console.warn('generateStyled: Not on client side, skipping');
+      return;
+    }
+
+    const startTime = performance.now();
+    const startMemory = getMemoryUsage();
+
+    try {
+      console.log('generateStyled: Starting generation...');
+
+      // Try dynamic import with error handling
+      let QRCodeStyling;
+      try {
+        const qrModule = await import("qr-code-styling");
+        QRCodeStyling = qrModule.default;
+        console.log('generateStyled: QRCodeStyling imported successfully');
+      } catch (importError) {
+        console.error('generateStyled: Failed to import qr-code-styling:', importError);
+        return;
+      }
+
+      if (!QRCodeStyling) {
+        console.error('generateStyled: QRCodeStyling is null/undefined');
+        return;
+      }
+
+      console.log('generateStyled: Creating QR code with style:', styleSettings);
+
+      // Map style settings to qr-code-styling options  
+      const getDotType = (style: string): 'rounded' | 'dots' | 'classy' | 'classy-rounded' | 'square' | 'extra-rounded' => {
+        switch (style) {
+          case 'circle': return 'dots';
+          case 'rounded': return 'rounded';
+          case 'dots': return 'dots';
+          case 'star': return 'extra-rounded';
+          case 'diamond': return 'classy';
+          default: return 'square';
+        }
+      };
+
+      const getCornerType = (style: string): 'dot' | 'square' | 'extra-rounded' | 'rounded' | 'dots' | 'classy' | 'classy-rounded' => {
+        switch (style) {
+          case 'circle': return 'dot';
+          case 'rounded': return 'rounded';
+          default: return 'square';
+        }
+      };
+
+      const dotType = getDotType(styleSettings.dotStyle);
+      const cornerType = getCornerType(styleSettings.cornerStyle);
+      
+      console.log('QR Code Styling - Dot Style:', styleSettings.dotStyle, '-> Type:', dotType);
+      console.log('QR Code Styling - Corner Style:', styleSettings.cornerStyle, '-> Type:', cornerType);
+
+      // Create QR code with advanced styling
+      const qrCodeConfig = {
+        width: size,
+        height: size,
+        type: "canvas" as const, // Changed to canvas for better compatibility
+        data: value,
+        margin: 10,
+        qrOptions: {
+          typeNumber: 0 as const,
+          mode: "Byte" as const,
+          errorCorrectionLevel: "M" as const
+        },
+        dotsOptions: {
+          color: styleSettings.foregroundColor,
+          type: dotType
+        },
+        backgroundOptions: {
+          color: styleSettings.backgroundColor,
+        },
+        cornersSquareOptions: {
+          color: styleSettings.foregroundColor,
+          type: cornerType
+        },
+        cornersDotOptions: {
+          color: styleSettings.foregroundColor,
+          type: dotType
+        }
+      } as any;
+
+      console.log('generateStyled: QR code config:', qrCodeConfig);
+
+      const qrCode = new QRCodeStyling(qrCodeConfig);
+
+      console.log('generateStyled: QR code created, generating data URL...');
+
+      // Generate as data URL using canvas (without logo first)
+      let dataURL = await new Promise<string>((resolve, reject) => {
+        // Create a temporary container
+        const container = document.createElement('div');
+        container.style.position = 'fixed';
+        container.style.top = '-9999px';
+        container.style.left = '-9999px';
+        document.body.appendChild(container);
+        
+        try {
+          qrCode.append(container);
+          
+          // Wait a bit for rendering
+          setTimeout(() => {
+            const canvas = container.querySelector('canvas');
+            if (canvas) {
+              const dataURL = canvas.toDataURL('image/png');
+              document.body.removeChild(container);
+              resolve(dataURL);
+            } else {
+              document.body.removeChild(container);
+              reject(new Error('Canvas not found'));
+            }
+          }, 100);
+        } catch (error) {
+          document.body.removeChild(container);
+          reject(error);
+        }
+      });
+
+      // Add logo using our existing logo logic (if present)
+      if (logo) {
+        console.log('generateStyled: Adding logo using existing logo logic');
+        try {
+          dataURL = await createQRCodeWithLogo(dataURL, logo, styleSettings);
+        } catch (error) {
+          console.warn('generateStyled: Failed to add logo:', error);
+          // Continue with QR code without logo
+        }
+      }
+
+      console.log('generateStyled: Data URL generated successfully');
+
+      const rawFileSize = new Blob([dataURL]).size;
+      const endTime = performance.now();
+      const endMemory = getMemoryUsage();
+
+      const metric: GenerationMetric = {
+        id,
+        renderTime: sanitizeMetric(endTime - startTime),
+        memoryUsage: sanitizeMetric(endMemory - startMemory),
+        fileSize: sanitizeMetric(rawFileSize),
+        timestamp: Date.now(),
+        value,
+        size,
+        logo,
+        dataURL,
+      };
+
+      console.log('generateStyled: Adding metric to store...', metric);
+      addMetric(metric, "qr-code-styling");
+      console.log('generateStyled: Metric added successfully');
+    } catch (e) {
+      console.error("GENERATE STYLED ERROR ::", e);
+    }
+
+    waiting.current.push("qr-code-styling");
+  }, [value, size, logo, styleSettings, addMetric]);
 
   const generate = useCallback(async () => {
     const items = [
       { name: "qrcode", fn: generateVanilla },
       { name: "react-qr-code", fn: generateReact },
       { name: "qrcode.react", fn: generateReactDot },
+      { name: "qr-code-styling", fn: generateStyled },
     ];
     
     loading.show({ message: `Generating QR codes... (${iterations} iterations)` });
@@ -288,7 +456,7 @@ export function useGeneration() {
     } finally {
       loading.hide();
     }
-  }, [generateVanilla, generateReact, generateReactDot, generateAndWait, setCurrentId, iterations]);
+  }, [generateVanilla, generateReact, generateReactDot, generateStyled, generateAndWait, setCurrentId, iterations]);
 
   return generate;
 }

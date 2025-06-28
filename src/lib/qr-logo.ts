@@ -2,6 +2,8 @@
  * Utility functions for combining QR codes with logos
  */
 
+import { QRStyleSettings } from "@/store/qrcode";
+
 export interface LogoOptions {
   logo: string; // Base64 logo data
   logoSize?: number; // Logo size as percentage of QR code (default: 0.2)
@@ -144,15 +146,24 @@ export async function combineQRCodeWithLogo(
  */
 export async function createQRCodeWithLogo(
   qrCodeDataURL: string,
-  logo: string
+  logo: string,
+  styleSettings?: QRStyleSettings
 ): Promise<string> {
   try {
+    const getLogoRounding = (style: string) => {
+      switch (style) {
+        case 'circle': return 999; // Large radius for circular effect
+        case 'rounded': return 8;
+        default: return 0; // Square
+      }
+    };
+
     const result = await combineQRCodeWithLogo(qrCodeDataURL, {
       logo,
       logoSize: 0.2, // 20% of QR code size
       logoMargin: 0.1, // 10% margin around logo
-      logoBackground: '#ffffff',
-      logoRounding: 8
+      logoBackground: styleSettings?.backgroundColor || '#ffffff',
+      logoRounding: getLogoRounding(styleSettings?.logoStyle || 'rounded')
     });
     
     return result;

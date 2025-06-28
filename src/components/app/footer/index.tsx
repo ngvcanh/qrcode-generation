@@ -104,6 +104,10 @@ export function Footer() {
                     <span>• qrcode.react</span>
                     <span className="text-purple-400">React components</span>
                   </div>
+                  <div className="flex items-center justify-between">
+                    <span>• qr-code-styling</span>
+                    <span className="text-emerald-400">Advanced styling</span>
+                  </div>
                 </div>
               </div>
             </div>

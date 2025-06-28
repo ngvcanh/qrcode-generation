@@ -272,6 +272,13 @@ export function PackageInfoDialog({ packageName, isOpen, onClose }: PackageInfoD
           gradient: 'from-pink-400 to-pink-500',
           light: 'bg-pink-900/15'
         };
+      case 'qr-code-styling':
+        return { 
+          primary: 'text-emerald-400',
+          bg: 'bg-emerald-500',
+          gradient: 'from-emerald-400 to-emerald-500',
+          light: 'bg-emerald-900/15'
+        };
       default:
         return { 
           primary: 'text-gray-400',

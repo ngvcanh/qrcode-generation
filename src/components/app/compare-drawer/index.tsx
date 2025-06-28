@@ -106,7 +106,8 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
   const packages = [
     { name: 'qrcode', color: 'blue', fullName: 'qrcode' },
     { name: 'react-qr-code', color: 'purple', fullName: 'react-qr-code' },
-    { name: 'qrcode.react', color: 'green', fullName: 'qrcode.react' }
+    { name: 'qrcode.react', color: 'green', fullName: 'qrcode.react' },
+    { name: 'qr-code-styling', color: 'orange', fullName: 'qr-code-styling' }
   ];
 
   const getPackageData = (packageName: string) => {
@@ -173,6 +174,17 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
           bundleSize: '~85KB minified',
           compatibility: 'React 16+, Modern browsers',
           maintenance: 'Very active development, feature-rich'
+        };
+      case 'qr-code-styling':
+        return {
+          description: 'Advanced QR code library with extensive styling capabilities and logo support.',
+          pros: ['Advanced styling', 'Logo support', 'Multiple shapes', 'High customization', 'Multiple formats'],
+          cons: ['Larger bundle size', 'More complex setup', 'Learning curve'],
+          useCase: 'Perfect for applications requiring highly styled QR codes with logos and custom shapes.',
+          architecture: 'Canvas-based with advanced rendering pipeline and style engine',
+          bundleSize: '~120KB minified',
+          compatibility: 'Modern browsers, Canvas support required',
+          maintenance: 'Active development, styling-focused'
         };
       default:
         return null;
@@ -347,6 +359,12 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
         github: '3k+ stars',
         issues: 'Moderate issue count',
         community: 'React community with customization focus'
+      },
+      'qr-code-styling': {
+        downloads: '~300k weekly',
+        github: '2k+ stars',
+        issues: 'Active development, styling-focused',
+        community: 'Design-focused community with advanced styling needs'
       }
     };
 
@@ -388,13 +406,20 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
           approach: 'Multi-format rendering with extensive customization',
           dependencies: 'React, qrcode library',
           rendering: 'Flexible rendering with Canvas/SVG options'
+        },
+        'qr-code-styling': {
+          type: 'Advanced Styling Library',
+          approach: 'Canvas-based with advanced styling engine and logo support',
+          dependencies: 'qrcode library, canvas dependencies',
+          rendering: 'Canvas-based with complex styling pipeline'
         }
       },
       apiDesign: {
         title: 'API Design Philosophy',
         qrcode: 'Functional API with callback-based generation',
         'react-qr-code': 'Component props with sensible defaults',
-        'qrcode.react': 'Comprehensive props API with fine-grained control'
+        'qrcode.react': 'Comprehensive props API with fine-grained control',
+        'qr-code-styling': 'Object-oriented API with advanced styling configuration'
       },
       ecosystem: enhancedEcosystem
     };
@@ -524,6 +549,24 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
           to: 'qrcode',
           difficulty: 'Medium',
           steps: ['Refactor to functional API', 'Handle canvas/SVG output', 'Implement React integration']
+        },
+        {
+          from: 'qrcode',
+          to: 'qr-code-styling',
+          difficulty: 'Medium',
+          steps: ['Refactor to object-oriented API', 'Configure styling options', 'Handle advanced features like logos']
+        },
+        {
+          from: 'qrcode.react',
+          to: 'qr-code-styling',
+          difficulty: 'Easy',
+          steps: ['Switch from component to instance-based API', 'Configure advanced styling', 'Leverage logo support']
+        },
+        {
+          from: 'react-qr-code',
+          to: 'qr-code-styling',
+          difficulty: 'Medium',
+          steps: ['Replace SVG component with canvas-based generation', 'Configure styling engine', 'Add logo functionality']
         }
       ]
     };
@@ -575,6 +618,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
       qrcode?: number;
       'react-qr-code'?: number;
       'qrcode.react'?: number;
+      'qr-code-styling'?: number;
     }> = [];
 
     for (let i = 1; i <= maxSequence; i++) {
@@ -583,6 +627,7 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
         qrcode: undefined as number | undefined,
         'react-qr-code': undefined as number | undefined,
         'qrcode.react': undefined as number | undefined,
+        'qr-code-styling': undefined as number | undefined,
       };
 
       // Add data for each package if available at this sequence
@@ -597,6 +642,8 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
             dataPoint['react-qr-code'] = value;
           } else if (pkg.name === 'qrcode.react') {
             dataPoint['qrcode.react'] = value;
+          } else if (pkg.name === 'qr-code-styling') {
+            dataPoint['qr-code-styling'] = value;
           }
         }
       });
@@ -906,6 +953,10 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                         <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
                                         <stop offset="95%" stopColor="#10b981" stopOpacity={0.05} />
                                       </linearGradient>
+                                      <linearGradient id="colorQrCodeStyling" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#f59e0b" stopOpacity={0.05} />
+                                      </linearGradient>
                                     </defs>
                                     <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
                                     <XAxis 
@@ -978,6 +1029,20 @@ export function CompareDrawer({ isOpen, onClose }: CompareDrawerProps) {
                                         connectNulls={false}
                                         dot={{ fill: '#10b981', strokeWidth: 2, r: 3 }}
                                         activeDot={{ r: 5, stroke: '#10b981', strokeWidth: 2 }}
+                                      />
+                                    )}
+                                    
+                                    {getPackageData('qr-code-styling') && (
+                                      <Area
+                                        type="monotone"
+                                        dataKey="qr-code-styling"
+                                        stroke="#f59e0b"
+                                        strokeWidth={2}
+                                        fill="url(#colorQrCodeStyling)"
+                                        name="qr-code-styling"
+                                        connectNulls={false}
+                                        dot={{ fill: '#f59e0b', strokeWidth: 2, r: 3 }}
+                                        activeDot={{ r: 5, stroke: '#f59e0b', strokeWidth: 2 }}
                                       />
                                     )}
                                   </AreaChart>

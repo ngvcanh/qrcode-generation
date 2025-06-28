@@ -8,6 +8,7 @@ const Form = dynamic(() => import("@/components/app/form").then(mod => ({ defaul
 const QRCodeReact = dynamic(() => import("@/components/app/qrcode-react").then(mod => ({ default: mod.QRCodeReact })), { ssr: false });
 const QRCodeReactDot = dynamic(() => import("@/components/app/qrcode-react-dot").then(mod => ({ default: mod.QRCodeReactDot })), { ssr: false });
 const QRCodeVanilla = dynamic(() => import("@/components/app/qrcode-vanilla").then(mod => ({ default: mod.QRCodeVanilla })), { ssr: false });
+const QRCodeStyled = dynamic(() => import("@/components/app/qrcode-styled").then(mod => ({ default: mod.QRCodeStyled })), { ssr: false });
 const PackageInfoDialog = dynamic(() => import("@/components/app/package-info-dialog").then(mod => ({ default: mod.PackageInfoDialog })), { ssr: false });
 const CompareDrawer = dynamic(() => import("@/components/app/compare-drawer").then(mod => ({ default: mod.CompareDrawer })), { ssr: false });
 const SettingsDrawer = dynamic(() => import("@/components/app/settings-drawer").then(mod => ({ default: mod.SettingsDrawer })), { ssr: false });
@@ -66,10 +67,11 @@ export default function Home() {
             </div>
 
             {/* QR Code Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8">
               <QRCodeVanilla onInfoClick={handlePackageInfoClick} />
               <QRCodeReact onInfoClick={handlePackageInfoClick} />
               <QRCodeReactDot onInfoClick={handlePackageInfoClick} />
+              <QRCodeStyled onInfoClick={handlePackageInfoClick} />
             </div>
           </div>
         </div>

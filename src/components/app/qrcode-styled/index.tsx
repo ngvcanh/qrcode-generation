@@ -5,13 +5,13 @@ import { Download, Eye } from "lucide-react";
 import { downloadAsPNG, downloadAsSVG, showDownloadOptions, generateFilename } from "@/lib/download";
 import { toast } from "@/lib/toast";
 
-export interface QRCodeReactProps {
+export interface QRCodeStyledProps {
   onInfoClick?: (packageName: string) => void;
 }
 
-export function QRCodeReact({ onInfoClick }: QRCodeReactProps) {
+export function QRCodeStyled({ onInfoClick }: QRCodeStyledProps) {
   const { size, stacks, currentId, value, styleSettings } = useQRCode();
-  const packageStack = stacks['react-qr-code'];
+  const packageStack = stacks['qr-code-styling'];
   const hasQRCode = packageStack && packageStack.stack.length > 0;
   
   // Get the current QR code data
@@ -30,7 +30,7 @@ export function QRCodeReact({ onInfoClick }: QRCodeReactProps) {
       
       if (format === 'cancel') return;
       
-      const filename = generateFilename('react-qr-code', value, !!currentQRCode.logo);
+      const filename = generateFilename('qr-code-styling', value, !!currentQRCode.logo);
       
       if (format === 'png') {
         await downloadAsPNG(currentQRCode.dataURL, { filename });
@@ -50,16 +50,16 @@ export function QRCodeReact({ onInfoClick }: QRCodeReactProps) {
       className="w-full"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
     >
-      <QRCodeTitle name="react-qr-code" onInfoClick={onInfoClick} />
+      <QRCodeTitle name="qr-code-styling" onInfoClick={onInfoClick} />
       
       {/* QR Code Display Area */}
       <motion.div 
         className="mt-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700 p-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
       >
         <div className="flex flex-col items-center">
           {/* QR Code Container */}
@@ -83,15 +83,15 @@ export function QRCodeReact({ onInfoClick }: QRCodeReactProps) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={currentQRCode.dataURL}
-                    alt="QR Code generated with react-qr-code"
+                    alt="QR Code generated with qr-code-styling"
                     className="max-w-full h-auto rounded-lg"
                     style={{ width: size, height: size }}
                   />
                 </div>
               ) : hasQRCode ? (
-                <div className="text-purple-500 text-center p-4">
+                <div className="text-emerald-500 text-center p-4">
                   <div className="text-sm font-semibold mb-2">QR Code Generated</div>
-                  <div className="text-xs text-slate-500">Package: react-qr-code</div>
+                  <div className="text-xs text-slate-500">Package: qr-code-styling</div>
                 </div>
               ) : (
                 <div className="text-slate-500 text-center p-4">
@@ -109,7 +109,7 @@ export function QRCodeReact({ onInfoClick }: QRCodeReactProps) {
                 className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 500, delay: 0.6 }}
+                transition={{ type: "spring", stiffness: 500, delay: 0.7 }}
               >
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </motion.div>
@@ -122,11 +122,11 @@ export function QRCodeReact({ onInfoClick }: QRCodeReactProps) {
               className="flex justify-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.6 }}
             >
               <button 
                 onClick={handleDownload}
-                className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white text-sm rounded-lg transition-colors flex items-center gap-2"
+                className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm rounded-lg transition-colors flex items-center gap-2"
               >
                 <Download className="w-4 h-4" />
                 Download
