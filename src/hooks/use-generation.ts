@@ -10,6 +10,35 @@ import { createQRCodeWithLogo } from "@/lib/qr-logo";
 const QRCodeReact = dynamic(() => import("react-qr-code").then(mod => ({ default: mod.default })), { ssr: false });
 const QRCodeSVG = dynamic(() => import("qrcode.react").then(mod => ({ default: mod.QRCodeSVG })), { ssr: false });
 
+// Types for qr-code-styling library
+interface QRCodeStylingOptions {
+  width: number;
+  height: number;
+  type: "canvas" | "svg";
+  data: string;
+  margin: number;
+  qrOptions: {
+    typeNumber: 0;
+    mode: "Byte";
+    errorCorrectionLevel: "M";
+  };
+  dotsOptions: {
+    color: string;
+    type: 'rounded' | 'dots' | 'classy' | 'classy-rounded' | 'square' | 'extra-rounded';
+  };
+  backgroundOptions: {
+    color: string;
+  };
+  cornersSquareOptions: {
+    color: string;
+    type: 'dot' | 'square' | 'extra-rounded' | 'rounded' | 'dots' | 'classy' | 'classy-rounded';
+  };
+  cornersDotOptions: {
+    color: string;
+    type: 'rounded' | 'dots' | 'classy' | 'classy-rounded' | 'square' | 'extra-rounded';
+  };
+}
+
 // Only import renderToString on client side
 let renderToString: ((element: React.ReactElement) => string) | null = null;
 if (typeof window !== 'undefined') {
@@ -313,7 +342,7 @@ export function useGeneration() {
       console.log('QR Code Styling - Corner Style:', styleSettings.cornerStyle, '-> Type:', cornerType);
 
       // Create QR code with advanced styling
-      const qrCodeConfig = {
+      const qrCodeConfig: QRCodeStylingOptions = {
         width: size,
         height: size,
         type: "canvas" as const, // Changed to canvas for better compatibility
@@ -339,7 +368,7 @@ export function useGeneration() {
           color: styleSettings.foregroundColor,
           type: dotType
         }
-      } as any;
+      };
 
       console.log('generateStyled: QR code config:', qrCodeConfig);
 

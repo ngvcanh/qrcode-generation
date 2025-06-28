@@ -62,7 +62,7 @@ export function Form() {
             </h1>
           </div>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Compare performance across multiple QR code libraries. Generate QR codes with qrcode, react-qr-code, and qrcode.react.
+            Compare performance across multiple QR code libraries. Generate QR codes with qrcode, react-qr-code, qrcode.react, and qr-code-styling.
           </p>
         </motion.div>
 
