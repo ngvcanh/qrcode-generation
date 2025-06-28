@@ -49,6 +49,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
       backgroundColor: '#ffffff',
       foregroundColor: '#000000',
       logoStyle: 'rounded',
+      margin: 4,
     }
   );
 
@@ -77,6 +78,7 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
       backgroundColor: '#ffffff',
       foregroundColor: '#000000',
       logoStyle: 'rounded',
+      margin: 4,
     };
     setLocalSettings(defaultSettings);
     setStyleSettings(defaultSettings);
@@ -261,6 +263,32 @@ export function SettingsDrawer({ isOpen, onClose }: SettingsDrawerProps) {
                         placeholder="#000000"
                       />
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Margin */}
+              <div>
+                <h3 className="text-lg font-bold text-slate-200 mb-4">Margin</h3>
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-slate-300">
+                    QR Code Margin: {localSettings.margin}px
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="50"
+                    step="5"
+                    value={localSettings.margin}
+                    onChange={(e) => setLocalSettings(prev => ({ ...prev, margin: parseInt(e.target.value) }))}
+                    className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
+                  />
+                  <div className="flex justify-between text-xs text-slate-400">
+                    <span>No margin (0px)</span>
+                    <span>Large margin (50px)</span>
+                  </div>
+                  <div className="text-xs text-slate-500 mt-2">
+                    Controls the empty space around the QR code in pixels. Lower values create tighter QR codes.
                   </div>
                 </div>
               </div>

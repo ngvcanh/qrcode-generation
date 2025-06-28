@@ -33,6 +33,7 @@ export interface QRStyleSettings {
   backgroundColor: string;
   foregroundColor: string;
   logoStyle: 'square' | 'circle' | 'rounded';
+  margin: number;
 }
 
 export interface QRCodeState {
@@ -58,6 +59,7 @@ const initialState: QRCodeState = {
     backgroundColor: '#ffffff',
     foregroundColor: '#000000',
     logoStyle: 'rounded',
+    margin: 4,
   },
 };
 

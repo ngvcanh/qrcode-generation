@@ -119,7 +119,7 @@ export function useGeneration() {
     try {
       let dataURL = await QRCode.toDataURL(value, {
         width: size,
-        margin: 1,
+        margin: styleSettings.margin,
         color: {
           dark: styleSettings.foregroundColor,
           light: styleSettings.backgroundColor,
@@ -244,7 +244,7 @@ export function useGeneration() {
         fgColor: styleSettings.foregroundColor,
         bgColor: styleSettings.backgroundColor,
         style: { maxWidth: "100%", width: "100%" },
-        marginSize: 4,
+        marginSize: styleSettings.margin,
       });
 
       const svg = renderToString(element);
@@ -340,14 +340,16 @@ export function useGeneration() {
       
       console.log('QR Code Styling - Dot Style:', styleSettings.dotStyle, '-> Type:', dotType);
       console.log('QR Code Styling - Corner Style:', styleSettings.cornerStyle, '-> Type:', cornerType);
+      console.log('QR Code Styling - Margin Setting:', styleSettings.margin);
 
       // Create QR code with advanced styling
+      // qr-code-styling margin is in pixels, use the margin setting directly
       const qrCodeConfig: QRCodeStylingOptions = {
         width: size,
         height: size,
         type: "canvas" as const, // Changed to canvas for better compatibility
         data: value,
-        margin: 10,
+        margin: styleSettings.margin,
         qrOptions: {
           typeNumber: 0 as const,
           mode: "Byte" as const,
@@ -370,7 +372,7 @@ export function useGeneration() {
         }
       };
 
-      console.log('generateStyled: QR code config:', qrCodeConfig);
+      console.log('generateStyled: QR code config with margin pixels:', styleSettings.margin);
 
       const qrCode = new QRCodeStyling(qrCodeConfig);
 
