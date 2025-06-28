@@ -27,6 +27,14 @@ interface MetrictStack {
   metrics: AggregatedMetrics;
 }
 
+export interface QRStyleSettings {
+  dotStyle: 'square' | 'circle' | 'rounded' | 'dots' | 'star' | 'diamond';
+  cornerStyle: 'square' | 'circle' | 'rounded';
+  backgroundColor: string;
+  foregroundColor: string;
+  logoStyle: 'square' | 'circle' | 'rounded';
+}
+
 export interface QRCodeState {
   value: string;
   size: number;
@@ -34,6 +42,7 @@ export interface QRCodeState {
   logo: string | null; // Base64 logo string
   stacks: Record<string, MetrictStack>;
   currentId: string;
+  styleSettings: QRStyleSettings;
 }
 
 const initialState: QRCodeState = {
@@ -43,6 +52,13 @@ const initialState: QRCodeState = {
   logo: null,
   stacks: {},
   currentId: "",
+  styleSettings: {
+    dotStyle: 'square',
+    cornerStyle: 'square',
+    backgroundColor: '#ffffff',
+    foregroundColor: '#000000',
+    logoStyle: 'rounded',
+  },
 };
 
 function calculateMetrics(stack: GenerationMetric[]): AggregatedMetrics {
@@ -102,6 +118,9 @@ const QRCodeStore = createStore({
     },
     setLogo: (state, action: PayloadAction<string | null>) => {
       state.logo = action.payload;
+    },
+    setStyleSettings: (state, action: PayloadAction<QRStyleSettings>) => {
+      state.styleSettings = action.payload;
     },
   },
 });
